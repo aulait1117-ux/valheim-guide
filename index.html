@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Valheim専用サーバーに入っている全33MODの中身と使い方。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ctext y=%2213%22 font-size=%2213%22%3E%F0%9F%90%B8%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -271,6 +270,32 @@
     background:var(--surface-2); border:1px solid var(--line);
     padding:8px 12px; margin-top:6px; overflow-x:auto; white-space:pre;
   }
+
+  /* ── 画面のどこを押すかを絵で示す ─────────── */
+  .ui-mock{
+    border:1px solid var(--line); background:var(--surface-2);
+    padding:12px; margin:12px 0; overflow-x:auto;
+  }
+  .ui-tabs{ display:flex; gap:4px; min-width:560px; }
+  .ui-tabs span{
+    flex:1; text-align:center; font-size:.74rem; padding:7px 4px;
+    background:var(--surface); border:1px solid var(--line); color:var(--muted);
+    white-space:nowrap;
+  }
+  .ui-tabs span.hot{
+    background:var(--ember); color:#fff; border-color:var(--ember); font-weight:700;
+  }
+  .ui-cap{ font-size:.78rem; color:var(--muted); margin-top:8px; }
+
+  /* 手順を大きく見せる */
+  .howto{ border:1px solid var(--line); background:var(--surface); padding:18px 22px; margin:16px 0; }
+  .howto > h4{
+    margin:0 0 12px; font-size:.72rem; font-family:var(--mono); letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted); font-weight:600;
+  }
+  .howto .steps li{ padding-left:40px; }
+  .howto .steps li b{ color:var(--ink); }
+  .steps li .sub{ display:block; font-size:.86rem; color:var(--muted); margin-top:2px; }
 </style>
 
 <div class="wrap">
@@ -577,6 +602,14 @@
         </ul>
       </div>
       <div class="callout">魔法用の素材（魔法の木材・ボスの破片・毛糸・生地・巻物）は新しい魔法の敵が落とす。魔法をやるなら敵を狩る流れになる。</div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>魔法を使うには杖が要る</b>。魔法の作業台で作る。持ち替えて左クリックで撃つ</li>
+          <li>撃つのに消費するのは体力ではなく<b>エイトル</b>。エイトルは<b>ミストランドの食事</b>で増える</li>
+          <li>属性ごとに杖が分かれている。相手の弱点は<b>アルマナックの生物タブ</b>で確認できる</li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -603,6 +636,13 @@
       </div>
       <div class="callout">
         新しいミニボスの<b>祭壇は「新しく生成された土地」にしか出ない</b>。今のワールドの既に探索済みの場所には湧かないので、<b>まだ行っていない方へ探検すると出会える</b>。
+      </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>やることは無い。</b>各バイオームに新しい敵とボスが自動で湧くようになる</li>
+          <li>初見の相手は<b>アルマナックの生物タブ</b>で耐性・弱点・落とす物を先に見ておくと安全</li>
+        </ul>
       </div>
     </div>
   </article>
@@ -743,6 +783,13 @@
         もっとレアを出したいなら、いじれる場所は2つ。<b>①カルマの閾値を下げる</b>（敵のレベルが上がりやすくなる＝EpicLootのレア率が上がる）
         <b>②執行者の確定報酬を増やす</b>。どちらも数字を変えるだけなので、やりたければ言ってほしい。
       </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>やることは無い。</b>敵に強化（32種類の効果）が付いて湧くようになる</li>
+          <li>強い個体ほど<b>EpicLootのレア装備を落としやすい</b>。狙って倒す価値がある</li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -787,6 +834,13 @@
       </div>
       <div class="callout">
         <b>極北の敵と場所は「まだ行っていない土地」にしか湧かない。</b> 既に探索した極北には出ないので、奥へ進むこと。
+      </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>やることは無い。</b>極北（マップ最北の雪原）に敵が湧くようになる</li>
+          <li>極北の素材（ティラニウム・ラグノライト・ソラダス）はここでしか手に入らない</li>
+        </ul>
       </div>
     </div>
   </article>
@@ -842,6 +896,16 @@
       <div class="callout good">
         <b>「空を飛ぶ」の土台はこのMOD。</b> ただしバニラには手懐けられる飛行生物がいなかった。
         そこで下の <b>MagicalMounts</b>（ペガサス・ドラゴン）を追加したので、<b>実際に飛べるようになった</b>。
+      </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>まず鞍を作る。</b>バイオームごとに専用の鞍がある（平原の鞍・森の鞍・沼の鞍・山の鞍・草原の鞍・ミストランドの鞍・灰の地の鞍・極北の鞍）</li>
+          <li>手なずけた生き物に鞍を付けて、近づいて乗る。<b>降りるときも同じ操作</b></li>
+          <li><b>乗ったまま攻撃できる。</b>盾の受けキーで特殊行動が出る</li>
+          <li><b>ポータルを一緒にくぐれる</b>（置いてけぼりにならない）</li>
+          <li>陸の生き物は<b>水中で溺れる</b>ので、深いところへ入れない</li>
+        </ul>
       </div>
     </div>
   </article>
@@ -1031,6 +1095,13 @@
         </ul>
       </div>
       <div class="callout good">レシピが分からないときは、下の <b>VNEI</b>（図鑑）で調べられる。</div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>ハンマーを持って建築メニューを開く</b>と、家具のカテゴリに140種類以上が増えている</li>
+          <li>作業台があれば建てられる。飾りなので<b>拠点の見た目づくり用</b></li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -1109,6 +1180,13 @@
         </ul>
       </div>
       <div class="callout">レシピは既定で無料。拠点を雪原にしたり、溶岩の道を作ったりできる。</div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>耕耘機（クワ）を持つ</b>と、平す・舗装するのほかに<b>別のバイオームの地面を塗る</b>項目が増える</li>
+          <li>草原に灰の地の地面を敷く、といった見た目づくりができる。<b>性能への影響は無い</b></li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -1127,6 +1205,13 @@
         </ul>
       </div>
       <div class="callout">地形は<b>ワールドデータそのもの</b>。派手にやると元に戻せない。念のため、ワールドのバックアップはサーバー側で自動的に取ってある。</div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>やることは無い。</b>整地の高さ制限（バニラは8m）が外れる</li>
+          <li>山を削る・谷を埋めるときに、途中で「これ以上動かない」が起きなくなる</li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -1257,6 +1342,14 @@
         </ul>
       </div>
       <div class="callout good">松明にも効く。<b>拠点の松明が消える問題がなくなる</b>のが地味に大きい。</div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>やることは無い。</b>持ち物に燃料や鉱石があれば、<b>5m以内</b>のかまど・精錬所・炭焼き窯・たいまつへ自動で入る</li>
+          <li><b>丸太と上質な木材は入らない設定</b>にしてある（建材を燃やされないため）</li>
+          <li>立てたたいまつ・壁のたいまつ・焚き火にも自動で補給される</li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -1373,6 +1466,14 @@
           <li><b>1日が60分</b>と長いので、時計があると「あと何分で夜か」が読める。夜は全体の15%＝<b>約9分</b></li>
         </ul>
       </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li>画面の上に<b>ゲーム内の時刻</b>が出る（24時間表記）</li>
+          <li>消したい・出したいときは <kbd>Home</kbd></li>
+          <li>このサーバーは<b>1日60分（昼45分・夜15分）</b>なので、夜の来る時刻の目安になる</li>
+        </ul>
+      </div>
     </div>
   </article>
 
@@ -1453,8 +1554,35 @@
         <span class="lbl">③ 宝箱（トークンで買う。中身は毎回ちがう）</span>
         <ul>
           <li>買うと<b>指定のバイオームに宝の在り処が出る</b>。行って開けると中身が手に入る</li>
-          <li><b>中身は抽選表なので、同じ宝箱でも毎回ちがうものが出る</b>。ジャンル別に8種類を用意した</li>
+          <li><b>中身は抽選表なので、同じ宝箱でも毎回ちがうものが出る</b>。ジャンル別に<b>9種類</b>を用意した</li>
         </ul>
+      </div>
+
+      <div class="howto">
+        <h4>宝の地図の買い方</h4>
+        <div class="ui-mock">
+          <div class="ui-tabs">
+            <span>トロフィー</span><span>建築物</span><span>アイテム</span><span>生物</span>
+            <span>状態効果</span><span>実績</span><span>賞金首</span>
+            <span class="hot">宝探し</span><span>ストア</span><span>宝くじ</span>
+            <span>記録</span><span>ランキング</span>
+          </div>
+          <p class="ui-cap">アルマナックを開いて、上のタブから<b>「宝探し」</b>を選ぶ。</p>
+        </div>
+        <ol class="steps">
+          <li><b>アルマナックを開いて「宝探し」タブ</b>
+              <span class="sub">上の絵のオレンジの位置。左から8番目</span></li>
+          <li><b>欲しい箱を選んで買う</b>
+              <span class="sub">5〜30トークン。トークンは1時間ごとに10枚たまっている</span></li>
+          <li><b>自分のマップに印が付く</b>
+              <span class="sub">買った瞬間に付く。地図を開いて場所を確かめる</span></li>
+          <li><b>そこへ向かう。100m以内まで近づくと樽が現れる</b>
+              <span class="sub">遠くからは何も見えない。近づいて初めて出る</span></li>
+          <li><b>樽を開ける</b>
+              <span class="sub">見つからないときは<b>ウィッシュボーン</b>を装備すると反応する</span></li>
+          <li><b>次に買えるのは30分後</b>
+              <span class="sub">連続では買えない。1回ずつ取りに行く作り</span></li>
+        </ol>
       </div>
       <div class="tbl-wrap">
       <table>
@@ -1594,6 +1722,14 @@
         「このMODを入れた全サーバーで、自分は常に最上位の報酬をもらえる」という仕込み。
         <b>導入時に削除済み</b>。今の名簿は空（＝全員が通常報酬）。
       </div>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>受け取りは <kbd>F9</kbd>。</b>ショップが開くので、そこで日替わり報酬を受け取る</li>
+          <li><b>24時間ごとに1回。</b>取り忘れても消えず、次に入ったときに受け取れる</li>
+          <li>遊んでいるだけで<b>1時間ごとに10トークン</b>が自動でたまる</li>
+        </ul>
+      </div>
     </div>
   </article>
 </div>
@@ -1660,6 +1796,23 @@
   <b>たまったトークンの使い道</b>は4つ。
   <b>宝探しの地図</b>を買う（5〜30枚）／<b>ストア</b>で確実に欲しい物やバフと交換する／
   <b>宝くじ</b>を回す（1枚で3つ揃えば10枚）／<b>コインに両替</b>する（1枚＝50コイン）。
+</div>
+
+
+<div class="howto">
+  <h4>日替わり報酬の受け取り方</h4>
+  <ol class="steps">
+    <li><b><kbd>F9</kbd> を押す</b>
+        <span class="sub">ショップの画面が開く。持ち物を開いている必要はない</span></li>
+    <li><b>「受け取る」を押す</b>
+        <span class="sub">24時間経っていれば押せる。まだなら残り時間が出る</span></li>
+    <li><b>持ち物に入る</b>
+        <span class="sub">持ち物がいっぱいだと入らないので、空けてから受け取る</span></li>
+  </ol>
+  <div class="callout good" style="margin-top:14px">
+    <b>取り忘れても消えない。</b>3日空けても、次に入ったときに続きから受け取れる。
+    受け取った<b>回数</b>で進むので、日数が飛ぶことはない。
+  </div>
 </div>
 
 <h3 style="margin-top:30px">順位の決まり方</h3>
