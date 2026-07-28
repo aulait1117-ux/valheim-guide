@@ -531,6 +531,9 @@
     <tr><td class="k">建築の配置制限</td><td class="num"><b>解除</b></td><td>「ここには置けません」がほぼ出ない</td></tr>
     <tr><td class="k">建築物の天候ダメージ</td><td class="num"><b>なし</b></td><td>雨で木が腐らない</td></tr>
     <tr><td class="k">設置距離</td><td class="num"><b>50m</b></td><td>かなり離れた場所へも置ける（バニラ8m）</td></tr>
+          <tr><td class="k">作業台の建築範囲</td><td class="num">20m → <b>200m</b></td><td>1つの作業台でカバーできる範囲が<b>10倍</b>。大きな拠点でも作業台を並べなくてよい</td></tr>
+          <tr><td class="k">作業台の付属設備の範囲</td><td class="num">5m → <b>50m</b></td><td>金床などが遠くても効く</td></tr>
+          <tr><td class="k">敵が湧かない範囲</td><td class="num">20m</td><td>建築範囲を広げても、敵が湧かない範囲は20mのまま（世界が静かになりすぎないように）</td></tr>
     <tr><td class="k">範囲修理</td><td class="num"><b>半径15m</b></td><td>ハンマーの修理1回で周り全部</td></tr>
     <tr><td class="k">解体時の資源</td><td class="num"><b>必ず全部返る</b></td><td>作り直しが気軽</td></tr>
     <tr><td class="k">まとめて収納の範囲</td><td class="num"><b>30m</b></td><td>AutoStack の効く距離</td></tr>
@@ -1608,19 +1611,31 @@
       </div>
       <div class="tbl-wrap">
       <table>
-        <thead><tr><th>宝箱</th><th>費用</th><th>出るもの（抽選）</th></tr></thead>
+        <thead><tr><th>宝箱</th><th>場所</th><th>費用</th><th>目玉（狙う物）</th><th>確率</th></tr></thead>
         <tbody>
-          <tr><td class="k">戦士の隠し箱</td><td class="num">8</td><td>鉄・銀・黒金属・鎖・トロフィー・コイン</td></tr>
-          <tr><td class="k">採掘者の隠し箱</td><td class="num">8</td><td>黒曜石・銀・水晶・タール・コイン・青の宝石</td></tr>
-          <tr><td class="k">船乗りの隠し箱</td><td class="num">8</td><td>海蛇の鱗・コイン・琥珀の真珠・銀の首飾り・魚・キチン</td></tr>
-          <tr><td class="k">農夫の隠し箱</td><td class="num">5</td><td>大麦・亜麻・ニンジン・カブ・玉ねぎ・蜂蜜・女王蜂</td></tr>
-          <tr><td class="k">建築家の隠し箱</td><td class="num">6</td><td>上質な木材・石・鉄の釘・樹脂・タール・黒大理石</td></tr>
-          <tr><td class="k">狩人の隠し箱</td><td class="num">8</td><td>ロックス/狼/鹿/トロールの皮・鱗の皮・羽根</td></tr>
-          <tr><td class="k">極北の隠し箱</td><td class="num">15</td><td>ティラニウム・ラグノライト・ソラダス・黒氷・ドレイクの鱗・魔法のルーン3種</td></tr>
-          <tr><td class="k">運試しの箱</td><td class="num">10</td><td>コイン大量・ルビー・琥珀の真珠・銀の首飾り・宝石3色・トークン</td></tr>
-          <tr><td class="k"><b>黄金の宝箱</b></td><td class="num">30</td><td><b>レア装備を作れるルーン石。0.1%でレジェンダリー、0.01%でミシック</b>（下の表）</td></tr>
+          <tr><td class="k">草原の隠し場所</td><td>草原</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">黒い森の隠し場所</td><td>黒い森</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">沼の隠し場所</td><td>沼</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">山の隠し場所</td><td>山</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">平地の隠し場所</td><td>平地</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">ミストランドの隠し場所</td><td>霧の地</td><td class="num">1</td><td>アルマナックトークン 3〜6</td><td class="num">1%</td></tr>
+          <tr><td class="k">農夫の隠し箱</td><td>草原</td><td class="num">5</td><td><b>女王蜂</b>（養蜂に必須）<br>マジックのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">建築家の隠し箱</td><td>草原</td><td class="num">6</td><td><b>黒大理石 100〜250</b><br>マジックのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">狩人の隠し箱</td><td>平地</td><td class="num">8</td><td><b>鱗の皮 20〜50</b><br>マジックのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">採掘者の隠し箱</td><td>山</td><td class="num">8</td><td><b>青の宝石</b><br>レアのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">船乗りの隠し箱</td><td>海</td><td class="num">8</td><td><b>琥珀の真珠 15〜30</b><br>レアのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">戦士の隠し箱</td><td>黒い森</td><td class="num">8</td><td><b>エリートドラウグルのトロフィー</b><br>レアのルーン石</td><td class="num">2%<br>1%</td></tr>
+          <tr><td class="k">アッシュランドの隠し場所</td><td>灰の地</td><td class="num">10</td><td>宝石3色（各2%）<br><b>エピックのルーン石</b></td><td class="num">6%<br>1%</td></tr>
+          <tr><td class="k">運試しの箱</td><td>草原</td><td class="num">10</td><td>トークン 15〜30 が返る<br><b>エピックのルーン石</b></td><td class="num">5%<br>1%</td></tr>
+          <tr><td class="k">極北の隠し箱</td><td>山</td><td class="num">15</td><td><b>魔法のルーン3種</b>（各1%）<br>エピックのルーン石</td><td class="num">3%<br>0.5%</td></tr>
+          <tr><td class="k"><b>黄金の宝箱</b></td><td>草原</td><td class="num">30</td><td><b>レジェンダリーのルーン石</b><br><b>ミシックのルーン石</b></td><td class="num"><b>0.1%</b><br><b>0.01%</b></td></tr>
         </tbody>
       </table>
+      </div>
+      <div class="callout good">
+        <b>確率は合計1000（黄金だけ10000）で組んである。</b>表の数字がそのまま出る割合。
+        <b>レジェンダリーとミシックのルーン石は黄金の宝箱でしか出ない。</b>
+        中身のアイテム名は<b>70件すべて実在を機械照合済み</b>。
       </div>
 
 
@@ -1663,6 +1678,7 @@
         <ul>
           <li><b>宝くじ</b>：トークン1枚でスロットを回す。<b>3つ揃えば10トークン</b>。
               絵柄は<b>8種類</b>まで減らしてあるので、そこそこ当たる（初期値は26種類で、ほぼ当たらなかった）。
+              <b>3つ揃えば20トークン、全部揃えば200トークン以上</b>（全部揃いは1%）。
               <b>大当たりは全員に通知される</b>。出るのは<b>トークンだけ</b>で、アイテムは出ない</li>
           <li><b>マーケット</b>：<b>プレイヤー同士でアイテムを売買できる</b>。値段を決めて出品する</li>
           <li><b>ストア</b>：トークンで<b>確実に</b>欲しいものと交換。アイテムのほか<b>バフ（状態効果）</b>も買える</li>
@@ -1718,6 +1734,31 @@
 <div class="callout good">
   <b>消してはいない。</b> プログラムは<span class="num">BepInEx/disabled_plugins/</span>へ移してあり、
   貯まっていたトークンや受け取り履歴もそのまま残してある。安全な代わりが見つかれば戻せる。
+</div>
+
+
+<h3 style="margin-top:30px">アルマナックトークンの稼ぎ方</h3>
+<p class="section-note" style="margin-bottom:10px">
+  宝箱もストアも宝くじも、すべてこのトークンで動く。稼ぎ方は<b>4つ</b>。
+</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">方法</th><th style="width:20%">効率</th><th>やり方</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>実績を達成する</b></td><td>20〜150枚／回</td>
+        <td><b>これが主力。</b>実績64個。討伐・採掘・航海・テイムなど、遊んでいれば勝手に進む</td></tr>
+    <tr><td class="k"><b>賞金首を倒す</b></td><td>繰り返し可</td>
+        <td>コインで契約を買い、強化された敵を倒す。<b>何度でも稼げる</b></td></tr>
+    <tr><td class="k"><b>コインを両替する</b></td><td>50コイン＝1枚</td>
+        <td>アルマナックの両替機能。コインが余ったら</td></tr>
+    <tr><td class="k"><b>宝くじを回す</b></td><td>1枚 → 20枚</td>
+        <td>3つ揃えば20枚。<b>全部揃えば200枚以上</b>（1%）</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout">
+  <b>安い箱（1トークン）は1%でトークンが3〜6枚返る。</b>回し続ければ少しずつ増える。
+  <b>運試しの箱</b>は5%で15〜30枚返るので、トークンを増やす目的でも回せる。
 </div>
 
 <h3 style="margin-top:30px">今もらえるもの</h3>
