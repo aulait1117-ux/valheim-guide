@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Valheim専用サーバーに入っている全33MODの中身と使い方。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ctext y=%2213%22 font-size=%2213%22%3E%F0%9F%90%B8%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<title>豚と踊るカエル — サーバー説明書</title>
+<style>
+  :root{
+    /* 炎と氷 ＝ このサーバーの新コンテンツ WarfareFireAndIce から取った二極の配色 */
+    --ground:#F2F4F6;      /* 冷たい灰。青に寄せた明るい地 */
+    --surface:#FFFFFF;
+    --surface-2:#E8ECEF;
+    --line:#CDD5DB;
+    --ink:#1B2228;
+    --ink-2:#4A5560;
+    --muted:#78848F;
+    --ember:#B4491C;       /* 炉の火 */
+    --frost:#2C6E86;       /* 氷河 */
+    --ember-soft:#F6E3D9;
+    --frost-soft:#DCEAF0;
+    --ok:#3F6B3F;
+    --warn:#8A5A12;
+    --crit:#96322B;
+
+    --display:"Yu Mincho","YuMincho","Hiragino Mincho ProN","MS PMincho",serif;
+    --body:"Yu Gothic UI","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",system-ui,sans-serif;
+    --mono:"Consolas","SFMono-Regular","Menlo",monospace;
+
+    --measure:74ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#101418; --surface:#171D23; --surface-2:#1E262E; --line:#2C3740;
+      --ink:#DDE4EA; --ink-2:#AAB6C0; --muted:#7C8892;
+      --ember:#E58A5B; --frost:#79BBD4;
+      --ember-soft:#2A1C15; --frost-soft:#152730;
+      --ok:#82B27F; --warn:#D2A24E; --crit:#E0796F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#101418; --surface:#171D23; --surface-2:#1E262E; --line:#2C3740;
+    --ink:#DDE4EA; --ink-2:#AAB6C0; --muted:#7C8892;
+    --ember:#E58A5B; --frost:#79BBD4;
+    --ember-soft:#2A1C15; --frost-soft:#152730;
+    --ok:#82B27F; --warn:#D2A24E; --crit:#E0796F;
+  }
+  :root[data-theme="light"]{
+    --ground:#F2F4F6; --surface:#FFFFFF; --surface-2:#E8ECEF; --line:#CDD5DB;
+    --ink:#1B2228; --ink-2:#4A5560; --muted:#78848F;
+    --ember:#B4491C; --frost:#2C6E86;
+    --ember-soft:#F6E3D9; --frost-soft:#DCEAF0;
+    --ok:#3F6B3F; --warn:#8A5A12; --crit:#96322B;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:16px; line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 20px 96px; }
+
+  /* ── 見出し ───────────────────────────── */
+  header.top{
+    border-bottom:2px solid var(--ink);
+    padding:44px 0 20px; margin-bottom:32px;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--muted); margin:0 0 10px;
+  }
+  h1{
+    font-family:var(--display); font-weight:600; font-size:clamp(2rem,5vw,3.1rem);
+    line-height:1.25; margin:0 0 12px; text-wrap:balance; letter-spacing:.02em;
+  }
+  .lede{ margin:0; color:var(--ink-2); max-width:var(--measure); }
+
+  h2{
+    font-family:var(--display); font-weight:600; font-size:1.55rem; letter-spacing:.03em;
+    margin:56px 0 6px; padding-bottom:8px; border-bottom:1px solid var(--line);
+    text-wrap:balance;
+  }
+  h2 .n{
+    font-family:var(--mono); font-size:.72rem; color:var(--ember);
+    letter-spacing:.12em; display:block; margin-bottom:4px;
+  }
+  h3{ font-size:1.02rem; font-weight:700; margin:0; letter-spacing:.01em; }
+  .section-note{ color:var(--muted); font-size:.9rem; margin:6px 0 20px; max-width:var(--measure); }
+
+  /* ── 接続カード ─────────────────────────── */
+  .conn{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin:28px 0 0;
+  }
+  .conn div{ background:var(--surface); padding:14px 16px; }
+  .conn dt{ font-size:.72rem; letter-spacing:.16em; color:var(--muted); font-family:var(--mono); text-transform:uppercase; }
+  .conn dd{ margin:4px 0 0; font-family:var(--mono); font-size:1.05rem; font-weight:600; word-break:break-all; }
+
+  /* ── テーブル ───────────────────────────── */
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); background:var(--surface); }
+  table{ width:100%; border-collapse:collapse; font-size:.9rem; min-width:520px; }
+  th,td{ padding:9px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{
+    background:var(--surface-2); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; font-family:var(--mono); white-space:nowrap;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.k{ white-space:nowrap; }
+  .num{ font-variant-numeric:tabular-nums; font-family:var(--mono); }
+  kbd{
+    font-family:var(--mono); font-size:.82rem; background:var(--surface-2);
+    border:1px solid var(--line); border-bottom-width:2px; padding:1px 7px;
+    white-space:nowrap; display:inline-block;
+  }
+
+  /* ── MODカード ──────────────────────────── */
+  .mods{ display:flex; flex-direction:column; gap:18px; margin-top:22px; }
+  .mod{ background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--frost); }
+  .mod.is-new{ border-left-color:var(--ember); }
+  .mod > .head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 12px;
+    padding:14px 20px 12px; border-bottom:1px solid var(--line);
+  }
+  .mod .ver{ font-family:var(--mono); font-size:.76rem; color:var(--muted); }
+  .tag{
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+    padding:2px 8px; border:1px solid currentColor; white-space:nowrap;
+  }
+  .tag.new{ color:var(--ember); }
+  .tag.jp{ color:var(--ok); }
+  .tag.nojp{ color:var(--warn); }
+  .mod .body{ padding:16px 20px 20px; display:flex; flex-direction:column; gap:14px; }
+  .mod p{ margin:0; max-width:var(--measure); }
+  .mod .what{ color:var(--ink); }
+  .block{ display:flex; flex-direction:column; gap:6px; }
+  .block > .lbl{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .mod ul{ margin:0; padding-left:1.2em; max-width:var(--measure); }
+  .mod li{ margin:3px 0; }
+  .mod li::marker{ color:var(--muted); }
+
+  .callout{
+    border-left:3px solid var(--warn); background:var(--surface-2);
+    padding:10px 14px; font-size:.9rem; color:var(--ink-2); max-width:var(--measure);
+  }
+  .callout.bad{ border-left-color:var(--crit); }
+  .callout.good{ border-left-color:var(--ok); }
+  .callout b{ color:var(--ink); }
+
+  a{ color:var(--frost); text-underline-offset:3px; }
+  a:focus-visible, summary:focus-visible{ outline:2px solid var(--ember); outline-offset:3px; }
+
+  details{ border:1px solid var(--line); background:var(--surface); }
+  summary{ cursor:pointer; padding:10px 16px; font-weight:600; font-size:.92rem; }
+  details[open] summary{ border-bottom:1px solid var(--line); }
+  details .inner{ padding:14px 16px; }
+
+  footer{
+    margin-top:72px; padding-top:20px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:.82rem;
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  /* 目次 */
+  nav.toc{
+    background:var(--surface); border:1px solid var(--line);
+    padding:18px 22px; margin:26px 0 8px;
+  }
+  nav.toc h2{ margin:0 0 12px; font-size:1rem; border:none; padding:0; letter-spacing:.08em; }
+  nav.toc ol{ margin:0; padding:0; list-style:none;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:6px 22px; }
+  nav.toc li{ font-size:.92rem; }
+  nav.toc a{ text-decoration:none; color:var(--ink); display:block; padding:3px 0;
+    border-bottom:1px dotted var(--line); }
+  nav.toc a:hover{ color:var(--ember); }
+  nav.toc .num{ font-family:var(--mono); font-size:.7rem; color:var(--muted); margin-right:8px; }
+  h2[id]{ scroll-margin-top:16px; }
+  .quickstart{ background:var(--frost-soft); border:1px solid var(--line);
+    border-left:3px solid var(--frost); padding:18px 22px; margin:22px 0; }
+  .quickstart h3{ margin:0 0 10px; }
+  .quickstart ol{ margin:0; padding-left:1.3em; }
+  .quickstart li{ margin:5px 0; }
+
+  /* ── 上に貼り付く目次バー ─────────────────── */
+  .subnav{
+    position:sticky; top:0; z-index:30;
+    background:color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    margin:0 -20px 0; padding:0 20px;
+  }
+  .subnav ul{
+    list-style:none; margin:0; padding:0; display:flex; gap:2px;
+    overflow-x:auto; scrollbar-width:thin;
+  }
+  .subnav a{
+    display:block; white-space:nowrap; text-decoration:none;
+    font-size:.8rem; color:var(--ink-2); padding:11px 12px;
+    border-bottom:2px solid transparent;
+  }
+  .subnav a:hover{ color:var(--ink); }
+  .subnav a.on{ color:var(--ember); border-bottom-color:var(--ember); font-weight:700; }
+
+  /* ── やりたいこと別の入口 ────────────────── */
+  .tasks{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line); margin:22px 0;
+  }
+  .tasks a{
+    background:var(--surface); padding:13px 16px; text-decoration:none; color:var(--ink);
+    display:flex; flex-direction:column; gap:3px;
+  }
+  .tasks a:hover{ background:var(--surface-2); }
+  .tasks b{ font-size:.94rem; }
+  .tasks span{ font-size:.78rem; color:var(--muted); }
+
+  /* ── MODの絞り込み ──────────────────────── */
+  .finder{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    border:1px solid var(--line); background:var(--surface);
+    padding:12px 16px; margin:22px 0 0;
+  }
+  .finder label{ font-family:var(--mono); font-size:.68rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted); }
+  .finder input{
+    flex:1 1 240px; min-width:0; font:inherit; font-size:.92rem;
+    background:var(--ground); color:var(--ink);
+    border:1px solid var(--line); padding:7px 11px;
+  }
+  .finder input:focus-visible{ outline:2px solid var(--ember); outline-offset:1px; }
+  .finder output{ font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .mod[hidden], h2[hidden], .section-note[hidden]{ display:none; }
+
+  /* ── 先頭へ戻る ─────────────────────────── */
+  #totop{
+    position:fixed; right:18px; bottom:18px; z-index:40;
+    background:var(--surface); color:var(--ink);
+    border:1px solid var(--line); border-bottom-width:2px;
+    padding:9px 14px; font:inherit; font-size:.82rem; cursor:pointer;
+    opacity:0; pointer-events:none; transition:opacity .18s;
+  }
+  #totop.show{ opacity:1; pointer-events:auto; }
+  #totop:hover{ border-color:var(--ember); color:var(--ember); }
+
+  /* ── 見出しの視認性を上げる ──────────────── */
+  h2[id]{ scroll-margin-top:60px; }
+  h3{ scroll-margin-top:60px; }
+  /* 節の切れ目をはっきりさせる */
+  h2{ margin-top:72px; }
+  .mods + h2{ margin-top:80px; }
+
+  /* ── 手順の箱（ランキングの回し方など） ───── */
+  .steps{ counter-reset:s; list-style:none; margin:14px 0 0; padding:0;
+    display:flex; flex-direction:column; gap:10px; }
+  .steps li{ counter-increment:s; position:relative; padding-left:38px; }
+  .steps li::before{
+    content:counter(s); position:absolute; left:0; top:1px;
+    width:26px; height:26px; display:grid; place-items:center;
+    font-family:var(--mono); font-size:.78rem; font-weight:700;
+    color:var(--frost); border:1px solid var(--frost);
+  }
+  code.cmd{
+    display:block; font-family:var(--mono); font-size:.84rem;
+    background:var(--surface-2); border:1px solid var(--line);
+    padding:8px 12px; margin-top:6px; overflow-x:auto; white-space:pre;
+  }
+</style>
+
+<div class="wrap">
+
+<nav class="subnav" aria-label="節へ移動">
+  <ul>
+    <li><a href="#keys">キー</a></li>
+    <li><a href="#settings">バニラとの違い</a></li>
+    <li><a href="#m-combat">戦闘</a></li>
+    <li><a href="#m-move">移動・騎乗</a></li>
+    <li><a href="#m-build">建築</a></li>
+    <li><a href="#m-life">便利</a></li>
+    <li><a href="#m-rank">実績・ランキング</a></li>
+    <li><a href="#rank-how">報酬の回り方</a></li>
+    <li><a href="#skills">スキル</a></li>
+    <li><a href="#translate">対訳</a></li>
+    <li><a href="#notes">注意</a></li>
+  </ul>
+</nav>
+
+<header class="top">
+  <p class="eyebrow">Valheim 専用サーバー ／ 全33MOD 説明書</p>
+  <h1>豚と踊るカエル</h1>
+  <p class="lede">
+    このサーバーに入っているMOD33個の中身と使い方、そして「バニラと何が違うか」を全部書いた。
+    設定値はすべて 2026-07-28 時点でサーバーの設定ファイルから直接読み取った実際の値。
+  </p>
+  <dl class="conn">
+    <div><dt>アドレス</dt><dd style="font-size:.9rem">配布ZIPに記載</dd></div>
+    <div><dt>パスワード</dt><dd style="font-size:.9rem">配布ZIPに記載</dd></div>
+    <div><dt>ワールド</dt><dd>KigyodoWorld</dd></div>
+    <div><dt>公開設定</dt><dd>招待制（一覧に出ない）</dd></div>
+  </dl>
+</header>
+
+
+<div class="quickstart">
+  <h3>はじめての人へ — まずこれだけ</h3>
+  <ol>
+    <li><b>言語を日本語に</b>する（設定 → 言語）。MODのアイテム名まで日本語になる</li>
+    <li>持ち物を開いて、大事な装備を <kbd>Alt</kbd>＋左クリックで<b>お気に入り</b>に。事故で捨てなくなる</li>
+    <li>拠点に箱を並べる。<b>50m以内の箱の素材はそのまま使えて</b>、<kbd>P</kbd>で一括収納できる</li>
+    <li>作り方が分からない物は <b>VNEI（図鑑）</b>で検索する</li>
+    <li>アルマナックを開いて<b>実績</b>を見る。達成でトークンが貯まり、宝箱やストアと交換できる</li>
+  </ol>
+</div>
+
+
+<div class="tasks">
+  <a href="#keys"><b>キーが分からない</b><span>全MODのキー割り当て一覧</span></a>
+  <a href="#settings"><b>普通のヴァルヘイムと何が違う？</b><span>変更した設定を全部</span></a>
+  <a href="#m-rank"><b>実績・ランキングを見たい</b><span>アルマナックの使い方</span></a>
+  <a href="#rank-how"><b>良い報酬をもらいたい</b><span>順位で日替わり報酬が変わる</span></a>
+  <a href="#skills"><b>スキルを早く上げたい</b><span>装備と薬で伸ばす</span></a>
+  <a href="#m-move"><b>飛びたい・乗りたい</b><span>騎乗と飛行のMOD</span></a>
+  <a href="#notes"><b>入れなかったMODは？</b><span>理由つきで全部書いた</span></a>
+  <a href="#m-life"><b>持ち物の整理が面倒</b><span>一括収納・遠隔クラフト</span></a>
+</div>
+
+<div class="finder">
+  <label for="q">MODを探す</label>
+  <input id="q" type="search" placeholder="例：飛行／騎乗／エンチャント／収納" autocomplete="off">
+  <output id="qn"></output>
+</div>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#keys"><span class="num">01</span>キー割り当て</a></li>
+    <li><a href="#settings"><span class="num">02</span>バニラとの違い（全設定）</a></li>
+    <li><a href="#m-combat"><span class="num">03</span>戦闘・コンテンツ</a></li>
+    <li><a href="#m-move"><span class="num">04</span>移動・騎乗・見た目</a></li>
+    <li><a href="#m-build"><span class="num">05</span>建築・内装・地形</a></li>
+    <li><a href="#m-life"><span class="num">06</span>生活の便利さ</a></li>
+    <li><a href="#m-rank"><span class="num">07</span>実績・ランキング・毎日の報酬</a></li>
+    <li><a href="#rank-how"><span class="num">08</span>報酬の回り方</a></li>
+    <li><a href="#skills"><span class="num">09</span>スキルを早く上げる</a></li>
+    <li><a href="#m-core"><span class="num">10</span>土台MOD</a></li>
+    <li><a href="#translate"><span class="num">11</span>英語画面の対訳</a></li>
+    <li><a href="#notes"><span class="num">12</span>注意すること</a></li>
+  </ol>
+</nav>
+
+<!-- ══════════ 1. キー ══════════ -->
+<h2 id="keys"><span class="n">Quick Reference 01</span>キー割り当て</h2>
+<p class="section-note">
+  MODが増えるとキーも増える。実際に設定ファイルへ書かれている値だけを載せた。
+</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>キー</th><th>できること</th><th>MOD</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><kbd>P</kbd></td><td>手持ちを近くの箱へ<b>まとめて収納</b>（同じ物が入っている箱にだけ入る）</td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>L</kbd></td><td>矢・食料などを近くの箱から<b>補充</b></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>O</kbd></td><td>持ち物／箱の<b>並べ替え</b></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>Delete</kbd></td><td>持っている物を<b>捨てる</b></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>Alt</kbd>＋クリック</td><td><b>お気に入り登録</b>。登録した物は収納・並べ替え・破棄の対象外になる（右クリックで枠ごと固定）</td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd></td><td>エピックルートの<b>アビリティ発動</b></td><td>Epic Loot</td></tr>
+    <tr><td class="k"><kbd>V</kbd></td><td><b>一人称視点</b>の切り替え <span style="color:var(--ember)">※2026-07-28に F10 から変更</span></td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>PageUp</kbd> / <kbd>PageDown</kbd></td><td>一人称のときの視野角を上げ下げ</td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>Home</kbd></td><td>画面の<b>時計</b>を表示／非表示</td><td>Clock Mod</td></tr>
+    <tr><td class="k"><kbd>Shift</kbd>＋使う</td><td>かまど・製錬炉へ<b>燃料や鉱石を一気に入れる</b></td><td>AzuCraftyBoxes</td></tr>
+    <tr><td class="k"><kbd>K</kbd>＋使う</td><td>馬から<b>馬鎧を外す</b><span style="color:var(--ember)">※Rから変更</span></td><td>OdinHorse</td></tr>
+    <tr><td class="k"><kbd>Y</kbd>＋使う</td><td>馬に<b>その場で待たせる</b><span style="color:var(--ember)">※Tから変更</span></td><td>OdinHorse</td></tr>
+    <tr><td class="k"><kbd>B</kbd>＋使う</td><td>鞍をつけた馬の<b>サドルバッグ</b>を開く（※既定では機能オフ）</td><td>OdinHorse</td></tr>
+    <tr><td class="k"><kbd>F1</kbd></td><td>MODの<b>設定パネル</b>を開く（ConfigurationManager）</td><td>土台</td></tr>
+    <tr><td class="k"><kbd>F2</kbd></td><td><b>高度建築モード</b>に入る（抜けるのは <kbd>F3</kbd>）<span style="color:var(--ember)">※F1から変更</span></td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>Alt</kbd>（建築中）</td><td>グリッドに<b>吸着</b>／Y軸の自由回転</td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>C</kbd> / <kbd>Z</kbd>（建築中）</td><td>X軸 / Z軸の<b>自由回転</b>（斜めに置ける）<span style="color:var(--ember)">※Z軸はVから変更</span></td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>F</kbd> / <kbd>G</kbd>（建築中）</td><td>狙った物の角度を<b>平行／垂直にコピー</b></td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>F4</kbd></td><td>グリッド吸着の<b>オン／オフ</b><span style="color:var(--ember)">※F7から変更</span></td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>F6</kbd></td><td>既定の吸着方式を変える</td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>Num0</kbd></td><td><b>高度編集モード</b>（置いた物を後から動かす）。<kbd>NumEnter</kbd>で確定、<kbd>F7</kbd>でリセット、<kbd>F8</kbd>で中止</td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>F5</kbd></td><td>コンソール（バニラ機能）</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout bad" style="margin-top:14px">
+  <b>キーを自分で変えるときは必ず読むこと。</b>
+  MODが33個入っているので、<b>押しやすいキーはほぼ埋まっている</b>。適当に変えると、
+  「押したら2つ同時に発動する」「別のMODが反応しなくなる」という状態になり、原因が分かりにくい。<br><br>
+  <b>今きれいに空いているのは、テンキーの2〜6・9くらいしかない。</b>（<kbd>I</kbd> <kbd>M</kbd> <kbd>U</kbd> <kbd>F9</kbd> <kbd>F11</kbd> <kbd>F12</kbd> は新しいMODで埋まった）
+  それ以外はValheim本体かMODのどれかが使っている（本体側は 設定 → 操作 で確認できる）。<br><br>
+  変えたいときは<b>言ってもらえれば、全MODとValheim本体の割り当てを機械的に突き合わせて、
+  衝突しないキーを選んで設定する</b>。自分で変えて挙動がおかしくなった場合も、同じ方法で原因を特定できる。
+</div>
+
+<div class="callout good" style="margin-top:10px">
+  <b>解消した衝突（2026-07-28）。</b>
+  <kbd>F1</kbd> が「高度建築モード」と「設定パネル」で二重だったので、建築モードを <kbd>F2</kbd> へ移した（<kbd>F1</kbd>はどのMODでも設定パネルなので、そちらを残した）。
+  <kbd>F7</kbd> も「グリッド吸着の切替」と「編集モードのリセット」で二重だったので、吸着の切替を <kbd>F4</kbd> へ移した。
+  一人称の <kbd>V</kbd> は<b>Valheim本体の「自動拾い」と重なっていた</b>ので、本体側を <kbd>N</kbd> へ逃がした。
+  馬の「その場で待て」は本体の<b>エモート</b>（<kbd>T</kbd>）と、「馬鎧を外す」は本体の<b>武器をしまう</b>（<kbd>R</kbd>）と重なっていたので、
+  それぞれ <kbd>Y</kbd> と <kbd>K</kbd> へ移した。<br>
+  <b>これで、Valheim本体どうしの元からの重複（右クリック＝防御と建築メニュー等）を除き、衝突はゼロ。</b>
+</div>
+
+<!-- ══════════ 2. サーバー設定 ══════════ -->
+<h2 id="settings"><span class="n">Quick Reference 02</span>このサーバーはバニラと何が違うか</h2>
+<p class="section-note">
+  ValheimPlus の設定はサーバーから全員へ自動で配られる。手元でいじっても上書きされるので、変えたいときは言ってほしい。
+</p>
+
+<h3 style="margin-top:22px">世界そのものの難易度</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>項目</th><th>この鯖</th><th>バニラ</th><th>意味</th></tr></thead>
+  <tbody>
+    <tr><td class="k">戦闘</td><td class="num"><b>veryhard</b></td><td class="num">normal</td><td>敵が強い。ゲーム本体の世界修正機能</td></tr>
+    <tr><td class="k">襲撃（レイド）</td><td class="num"><b>more</b></td><td class="num">normal</td><td>拠点への襲撃が多い</td></tr>
+    <tr><td class="k">ポータル</td><td class="num"><b>casual</b></td><td class="num">normal</td><td><b>鉱石もポータルで運べる</b></td></tr>
+    <tr><td class="k">1日の長さ</td><td class="num">3600秒（60分）</td><td class="num">1800秒</td><td>1日が2倍長い</td></tr>
+    <tr><td class="k">夜の割合</td><td class="num"><b>25%</b></td><td class="num">30%</td><td>1日60分のうち<b>昼45分・夜15分</b>。2026-07-28にバランス調整で15%から戻した</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:28px">集める・持つ・作る</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>項目</th><th>この鯖</th><th>効果</th></tr></thead>
+  <tbody>
+    <tr><td class="k">採取量</td><td class="num"><b>+100%（2倍）</b></td><td>木・石・銅・錫・鉄くず・銀・キチン・羽根・黒大理石・炎金属など、壊して取る資源が全部2倍</td></tr>
+    <tr><td class="k">ドロップ確率</td><td class="num"><b>+50%（1.5倍）</b></td><td>確率で落ちる物が落ちやすい</td></tr>
+    <tr><td class="k">スタック上限</td><td class="num"><b>+300%（4倍）</b></td><td>木50→200、鉱石30→120 など</td></tr>
+    <tr><td class="k">戦利品</td><td class="num">バニラのまま</td><td>敵からの落とし物。<b>2026-07-28に +30% をやめて通常へ戻した</b></td></tr>
+    <tr><td class="k">最大所持重量</td><td class="num">450</td><td>バニラ300。メギンギョルズは+150</td></tr>
+    <tr><td class="k">自動拾い範囲</td><td class="num">2m</td><td>歩くだけで拾える</td></tr>
+    <tr><td class="k">持ち物の段数</td><td class="num">6段</td><td>バニラ4段（＋2段）</td></tr>
+    <tr><td class="k"><b>資源の湧き直し</b></td><td class="num"><b>60分</b></td><td>ベリー・キノコ・アザミ・タンポポ・枝・火打石など。<b>バニラは240〜300分（4〜5時間）</b>だったのを1時間へ短縮した</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:28px">箱・船・カートの容量</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>入れ物</th><th>この鯖</th><th>バニラ</th><th>合計マス</th></tr></thead>
+  <tbody>
+    <tr><td class="k">木の箱</td><td class="num"><b>7列</b>×2段</td><td class="num">5×2</td><td class="num">14</td></tr>
+    <tr><td class="k">個人の箱</td><td class="num"><b>5列</b>×2段</td><td class="num">3×2</td><td class="num">10</td></tr>
+    <tr><td class="k">鉄の箱</td><td class="num"><b>8列</b>×4段</td><td class="num">6×4</td><td class="num">32</td></tr>
+    <tr><td class="k">黒金属の箱</td><td class="num">8列×4段</td><td class="num">8×4</td><td class="num">32</td></tr>
+    <tr><td class="k">カート</td><td class="num">8列×3段</td><td class="num">8×3</td><td class="num">24</td></tr>
+    <tr><td class="k">カルヴ（小舟）</td><td class="num"><b>4列</b>×2段</td><td class="num">2×2</td><td class="num">8</td></tr>
+    <tr><td class="k">ロングシップ</td><td class="num">8列×3段</td><td class="num">8×3</td><td class="num">24</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout" style="margin-top:14px">
+  <b>黒金属の箱・カート・ロングシップは増やせない。</b> ValheimPlus の列は<b>最大8</b>で、この3つはすでに上限。
+  もっと入れたい場合は<b>段（行）を増やす</b>ことになるが、4段を超えると箱の中にスクロールバーが出る。やるなら言ってほしい。
+</div>
+
+<h3 style="margin-top:28px">プレイヤー・建築</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>項目</th><th>この鯖</th><th>意味</th></tr></thead>
+  <tbody>
+    <tr><td class="k">経験値</td><td class="num">全スキル +25%</td><td>剣・弓・魔法・料理・農業・騎乗まで一律</td></tr>
+    <tr><td class="k">死亡ペナルティ</td><td class="num">バニラのまま</td><td><b>死ぬと全スキルの経験値が5%減る</b>（Valheim本来の仕様）。設定値の <span class="num">0</span> は「ゼロにする」ではなく「増減なし」の意味</td></tr>
+    <tr><td class="k"><b>手懐けにかかる時間</b></td><td class="num"><b>半分</b></td><td>全生物に適用。MagicalMountsの生物なら<b>30分→15分</b></td></tr>
+    <tr><td class="k"><b>鉱石を溶かす速度</b></td><td class="num"><b>2倍</b></td><td>製錬所・溶鉱炉が1個30秒→<b>15秒</b>。炭焼き窯も15秒→<b>7.5秒</b></td></tr>
+    <tr><td class="k"><b>石炭の消費</b></td><td class="num"><b>半分</b></td><td>インゴット1個につき石炭2→<b>1</b>。<b>-30%にはできない</b>（石炭は「何個」なので小数に刻めず、1.4を入れたら既定値に戻された）</td></tr>
+    <tr><td class="k"><b>船の速度</b></td><td class="num"><b>2倍</b></td><td>前進・後進とも +100%</td></tr>
+    <tr><td class="k">箱から素材を引く範囲</td><td class="num"><b>50m</b></td><td>AzuCraftyBoxes。20mから拡大</td></tr>
+    <tr><td class="k">落下ダメージ</td><td class="num">バニラのまま</td><td><b>高所から落ちれば普通に痛い。</b>こちらも <span class="num">0</span>＝増減なし</td></tr>
+    <tr><td class="k">食料の持続時間</td><td class="num">+50%</td><td>食べ直しの手間が減る</td></tr>
+    <tr><td class="k">素手ダメージ</td><td class="num">70</td><td>バニラに較べてかなり高い。フェンリル装備が活きる</td></tr>
+    <tr><td class="k">繁殖</td><td class="num">妊娠確率 2倍</td><td>他（必要な愛情・妊娠時間・成長時間）はバニラのまま</td></tr>
+    <tr><td class="k">建築の配置制限</td><td class="num"><b>解除</b></td><td>「ここには置けません」がほぼ出ない</td></tr>
+    <tr><td class="k">建築物の天候ダメージ</td><td class="num"><b>なし</b></td><td>雨で木が腐らない</td></tr>
+    <tr><td class="k">設置距離</td><td class="num"><b>50m</b></td><td>かなり離れた場所へも置ける（バニラ8m）</td></tr>
+    <tr><td class="k">範囲修理</td><td class="num"><b>半径15m</b></td><td>ハンマーの修理1回で周り全部</td></tr>
+    <tr><td class="k">解体時の資源</td><td class="num"><b>必ず全部返る</b></td><td>作り直しが気軽</td></tr>
+    <tr><td class="k">まとめて収納の範囲</td><td class="num"><b>30m</b></td><td>AutoStack の効く距離</td></tr>
+    <tr><td class="k">最大人数</td><td class="num">10人</td><td></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ══════════ 3. MOD ══════════ -->
+<h2 id="m-combat"><span class="n">Mods 01</span>戦闘・コンテンツ</h2>
+<p class="section-note">
+  Therzie 5部作は互いに繋がっている。Warfare が土台で、そこに防具（Armory）・魔法（Wizardry）・敵（Monstrum）・極北（Fire&amp;Ice）が乗る。
+</p>
+
+<div class="mods">
+
+  <article class="mod">
+    <div class="head">
+      <h3>Warfare</h3><span class="ver">Therzie / v1.8.9</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">武器を <b>107種</b>・盾8種・矢/ボルト13種・蜂蜜酒3種・爆弾・つるはし2種と、弓専用の作業台を追加する。他のTherzie MODの土台。</p>
+      <div class="block">
+        <span class="lbl">何が増えるか</span>
+        <ul>
+          <li><b>バニラに無い武器種</b>：ウォーパイク（突撃槍）、ランス、グレートボウ（超遠距離弓）、両手バスタードソード、クレイモア、投げ斧、クロスボウ、二刀流</li>
+          <li><b>両手武器の攻撃モーションが作り直されている</b>。バニラの両手武器は使いにくかったが、これでちゃんとした選択肢になる</li>
+          <li>バトルアックス・大槌・フェンリルの爪は<b>Warfare版に置き換わる</b>（元のレシピはワールド読み込み時に無効化される）</li>
+          <li>矢と弓は新しい「<b>矢師の台（Fletcher table）</b>」で作る。的も建てられる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">ボスからの限定ドロップ</span>
+        <ul>
+          <li>エルダー → 戦鎚（4%）</li>
+          <li>エイクスュル → クロスボウ（4%）</li>
+          <li>モデル → グレートボウ（6%）</li>
+          <li>ヤグルース → 刃（7%）</li>
+          <li>シーカークイーン → 篭手（8%）</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Armory</h3><span class="ver">Therzie / v1.3.1</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">バニラの防具を<b>強化版に作り替える</b>ためのMOD。専用の作業台「武具工房」を建てて、そこで既存防具をアップグレードする。</p>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>武具工房</b>を建てる。<b>鍛冶場と同じ拡張パーツでレベルを上げる</b>と、上位レシピが解放される</li>
+          <li>強化した防具は<b>次のバイオーム向けにさらに強化していける</b>。装備を捨てずに育てる形</li>
+          <li>溶解炉と収納チェストが内蔵されている</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">セット効果（自分の戦い方を選ぶ）</span>
+        <ul>
+          <li><b>ラゾルバック</b>＝アトゲイル・槍スキル＋スタミナ回復／<b>ハンター</b>＝刺突ダメージと弓・クロスボウ</li>
+          <li><b>ローグ</b>＝ナイフ／<b>ヴィゴラス</b>＝斧／<b>ウォリアー</b>＝棍棒／<b>ヴィーザル</b>＝剣／<b>ボールド</b>＝アトゲイル／<b>レギオン</b>＝槍</li>
+          <li><b>フェンリル</b>＝素手。このサーバーは素手ダメージが70に上げてあるので相性がいい</li>
+          <li><b>スタッグ</b>＝移動速度とジャンプ距離</li>
+        </ul>
+      </div>
+      <div class="callout">一部の防具は <b>Monstrum の敵が落とす素材</b>を使う。Monstrumも入っているので普通に作れる。</div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Wizardry</h3><span class="ver">Therzie / v1.1.8</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">魔法を本格化させる。<b>属性魔法の杖5種・血の魔法の杖2種・魔導士セット5種</b>、新しい魔法の敵、エイトル food、ポーション、スクロールを追加。</p>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>ウィザードテーブル</b>とその拡張を建てるところから始まる</li>
+          <li>杖はバイオームごと（黒い森・沼・山・平地・ミストランド）＋ゴーレム・サートリング</li>
+          <li><b>魔法のサークレット（額冠）</b>が5系統ある：エイトル回復／属性強化／狩人／隠密。青銅〜甲殻まで素材違いで用意されている</li>
+          <li>指輪もバイオームごとに5種</li>
+          <li><b>モンスターを召喚して戦わせられる</b></li>
+        </ul>
+      </div>
+      <div class="callout">魔法用の素材（魔法の木材・ボスの破片・毛糸・生地・巻物）は新しい魔法の敵が落とす。魔法をやるなら敵を狩る流れになる。</div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Monstrum</h3><span class="ver">Therzie / v1.5.1</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">新しいモンスター<b>11種</b>とミニボス<b>3体</b>を追加。倒すとWarfare・Armoryのレシピに必要な素材とトロフィーが手に入る。</p>
+      <div class="block">
+        <span class="lbl">増える敵</span>
+        <ul>
+          <li>キツネ、ラゾルバック（猪の上位）、ツキノワグマ、灰色小人の古代シャーマン、クローラー、ヘルレイス、腐ったヘラジカ、ハイイログマ、黒曜石ゴーレム、プラウラー、サメ</li>
+          <li><b>ミニボス3体</b>：アスモデウス／スヴァルト／ヴリコラサス。専用の祭壇で召喚する（ヴェグヴィシルで場所が分かる）</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">テイムできる</span>
+        <ul>
+          <li><b>新しい生物の一部は手懐けられる</b>。手懐けたら MountUpRestored の鞍を着ければ乗れる</li>
+          <li>キツネ・クマ用の毛皮の敷物も建てられる</li>
+        </ul>
+      </div>
+      <div class="callout">
+        新しいミニボスの<b>祭壇は「新しく生成された土地」にしか出ない</b>。今のワールドの既に探索済みの場所には湧かないので、<b>まだ行っていない方へ探検すると出会える</b>。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Warfare: Fire &amp; Ice</h3><span class="ver">Therzie / v2.0.8</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">未完成だった<b>極北（Deep North）</b>に植生と素材を入れ、<b>炎・氷・雷</b>を宿した最上位武器を追加する。今回の目玉。</p>
+      <div class="block">
+        <span class="lbl">まずやること</span>
+        <ul>
+          <li>極北へ行き、<b>ティラニウム鉱石（氷）</b>と<b>ラグノライト鉱石（炎）</b>と<b>ロクヴィル</b>を掘る</li>
+          <li><b>ユミルの鍛冶場</b>を建てる。ここが全ての起点。拡張として「ニョルズのなめし台」「ロクヴィルの溶解槽」「ソラダスの鍛造槌」「ルーン球」が付く</li>
+          <li><b>ドヴェルグの溶解炉</b>を建てると、あらゆる金属を通常より速く精錬できる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">武器の系統</span>
+        <ul>
+          <li><b>ニョルズ系＝氷</b>（敵を凍らせる）／<b>スルト系＝炎</b>（燃やす）。ほぼ全ての武器種に両系統がある</li>
+          <li>特殊武器：氷河／溶岩／雷光の<b>双刃</b>、クロムの嵐斧、スカジの双剣、憤怒と憎悪、スヴィガとフレック、ストームストライク・ハンマー</li>
+          <li>魔法：ヴァルカリオンの憤怒（炎）、スクリューミルの凍気（氷）、嵐呼びの杖（雷）</li>
+          <li><b>虚無呼びの杖</b>＝悪魔を召喚。<b>狼の心臓</b>＝ストームウルフを召喚。召喚した仲間には名前が付く</li>
+          <li>爆弾3種（炎・氷・雷）、爆発する矢とボルト</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">極北で採れるもの</span>
+        <ul>
+          <li>食料：ツンドラベリー、ウィンターキャップ（キノコ）、原初のネギ。<b>どれも苗から育てられる</b></li>
+          <li>木：北方樹・北方マツ。松ぼっくりから植えられる</li>
+          <li>素材：ウルサの毛皮、プライドタスクの毛皮、アイスストーカーの鱗、ダイアウルフの毛皮、黒氷、ヨトゥンの歯／眼球</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>極北にはまだ敵がいない。</b> このMODは地形と素材だけを足すもので、モンスターは別MOD（Monstrum Deep North）の担当。
+        入れていないので、極北は<b>危険が少ない代わりに手応えも薄い</b>。欲しければ追加できる。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Epic Loot</h3><span class="ver">RandyKnapp / v0.12.15</span>
+      <span class="tag jp">最初から日本語</span>
+    </div>
+    <div class="body">
+      <p class="what">ディアブロ的な<b>レアリティ付きの装備</b>を追加する。敵と宝箱から「マジック → レア → エピック → レジェンダリー → ミシック」の装備が落ちる。</p>
+      <div class="block">
+        <span class="lbl">レア度と、このサーバーでの出現率</span>
+        <ul>
+          <li>レア度は下から <b>マジック → レア → エピック → レジェンダリー → ミシック</b> の5段階</li>
+          <li><b>2026-07-28、全96のドロップ表に「レジェンダリー 0.1%・ミシック 0.02%」の下限を入れた。</b>
+              元は雑魚から出る可能性が0だったので、<b>どんな敵からでも、極めて低い確率だが出るようになった</b></li>
+          <li>星なしの雑魚は「そもそも何も落とさない」設定だったので、<b>0.5%の下限</b>も入れた。
+              つまり星なしの灰色小人からレジェンダリーが出る確率は <b>0.5% × 0.1% ＝ 0.0005%</b>（20万体に1体）</li>
+          <li>敵のレベルが上がるほど確率は跳ね上がる。<b>星3なら「30%で何か落ちる × その1%がレジェンダリー」＝ 0.3%</b></li>
+          <li>つまり<b>強い敵を狩るほど本命が出る</b>が、雑魚からの一発逆転もゼロではない</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>レジェンダリーを宝箱の中身として直接入れることはできない。</b>
+        EpicLootのレジェンダリーは「アイテムそのもの」ではなく<b>装備に後から付く称号</b>なので、
+        宝箱の抽選表に「レジェンダリーの剣」と書くことができない。
+        だから<b>ドロップ表の確率のほうを引き上げる</b>形で対応した。
+      </div>
+      <div class="block">
+        <span class="lbl">仕組み</span>
+        <ul>
+          <li>魔法の装備には<b>魔法効果</b>が複数付く。装備すると効果が乗る</li>
+          <li><b>エンチャント台</b>を建てると、装備の強化・分解・再構成ができる</li>
+          <li><b>ルーン</b>：未鑑定のアイテムが落ちる → エンチャント台で鑑定。既存の魔法装備を<b>生贄</b>にして効果をルーン石に取り出し、別の装備に付け替えられる</li>
+          <li>アビリティが付いた装備は <kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd> で発動</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>CreatureManager</h3><span class="ver">sighsorry / v1.1.2</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        敵に<b>32種類の強化</b>をランダムで付ける。さらに「同じ場所で狩り続けると土地が荒れる」<b>カルマ</b>という仕組みを持ち込む。
+        猪の体力バーの下に出る小さいアイコンが、その敵の付いている強化。
+      </p>
+      <div class="block">
+        <span class="lbl">強化のつき方</span>
+        <ul>
+          <li>強化は<b>攻撃／防御／弱体／特殊</b>の4群。<b>1体につき各群から最大1つ</b>＝最大4つまで付く</li>
+          <li>このサーバーでは<b>1つあたり8%</b>の確率（2026-07-28に5%から引き上げた）。<b>執行者だけは10%</b>とさらに当たりやすい</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">特に気をつける強化</span>
+        <ul>
+          <li><b>回避不可</b>：ローリングの無敵をすり抜けてくる（代わりに威力25%減）。盾とパリィは通常どおり効く</li>
+          <li><b>死の守り</b>：とどめの一撃を打ち消して体力20%で復活する（1体3回まで）</li>
+          <li><b>渦</b>：矢や魔法を50%で完全に無効化する。<b>遠距離だけで倒そうとすると詰む</b></li>
+          <li><b>適応</b>：一度受けたダメージ種を覚えて50%軽減する。<b>武器を持ち替えると通る</b></li>
+          <li><b>カメレオン</b>：10秒ごとに無敵になる属性が切り替わる</li>
+          <li><b>瞬間移動</b>：16m以内から一瞬で寄ってくる（警戒されてから3秒は使ってこない）</li>
+          <li><b>刈り取り</b>：近くの生物が死ぬたびに体力・攻撃力・<b>体格</b>が上がっていく</li>
+          <li><b>猛毒の死</b>：倒した瞬間、半径4m以内に最大体力の30%の毒をばらまく</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">カルマ（この地域はどれだけ荒れているか）</span>
+        <ul>
+          <li>敵を倒すと、その一帯のカルマが溜まる。ボスは25、トロール・ロックス・ギャル等は5。<b>ダンジョン内は4倍で溜まる</b></li>
+          <li>カルマ <b>45 / 90 / 150</b> で、その一帯に湧く敵のレベルが <b>+1 / +2 / +3</b>（2026-07-28に下げた）</li>
+          <li>カルマ <b>40</b> を超えると、20分ごとに<b>50%の確率で「執行者」</b>が現れる。手下を連れ、レベルが高く、強化を持っている</li>
+          <li>カルマは<b>15分で減り始める</b>。プレイヤーが死ぬと<b>その一帯のカルマは消える</b></li>
+        </ul>
+      </div>
+      <div class="callout good">
+        <b>調整できる。</b> 確率も閾値も執行者の出現率も全部設定ファイルの数字。きつすぎ／ぬるすぎなら言ってほしい。
+      </div>
+      <div class="block">
+        <span class="lbl">「強化された敵はレアを落としやすい」のか</span>
+        <ul>
+          <li><b>「強化を持っていること」自体は、落とし物に影響しない。</b>
+              CreatureManager の設定ファイルに <span class="num">CreatureManager does not manage loot/drop from this domain</span>（このMODは落とし物を管理しない）と明記されている</li>
+          <li><b>ただし「レベル」は効く。</b> Epic Loot の落とし物表はレベルごとに分かれていて、
+              同じ雑魚でも <b>Lv1＝魔法装備が落ちない → Lv3＝10% → Lv5＝30%</b> と上がり、
+              <b>レア度の内訳も良くなる</b>（Lv5でようやくレジェンダリーが1%出る）</li>
+          <li>そしてカルマは<b>敵のレベルを上げる</b>。つまり
+              <b>荒れた土地で狩るほど、敵が強くなり、同時に良い物を落とす</b>という繋がりが既に成立している</li>
+          <li><b>執行者は別枠で確定ボーナス報酬を持つ</b>。バイオームに応じてトロフィー＋<b>琥珀／ルビー／銀の首飾り</b>が上乗せで落ちる</li>
+        </ul>
+      </div>
+      <div class="callout">
+        もっとレアを出したいなら、いじれる場所は2つ。<b>①カルマの閾値を下げる</b>（敵のレベルが上がりやすくなる＝EpicLootのレア率が上がる）
+        <b>②執行者の確定報酬を増やす</b>。どちらも数字を変えるだけなので、やりたければ言ってほしい。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Monstrum: Deep North</h3><span class="ver">Therzie / v2.0.6</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>極北に敵と拠点を入れる。</b> Fire &amp; Ice が地形と素材だけを足したせいで空だった極北が、これで最終コンテンツになる。
+      </p>
+      <div class="block">
+        <span class="lbl">昼に出る敵</span>
+        <ul>
+          <li><b>ウルサ</b>（巨大熊。遠くから獲物を嗅ぎつける）／<b>プライドタスク</b>（マンモス。<b>鞍を作れば乗れる</b>）／<b>ダイアウルフ</b>（群れで狩る）／<b>アイスストーカー</b>（岸辺から氷を吐く海蛇）</li>
+          <li><b>ヨタール族</b>4種：原初術士（氷魔法）／ブレイドフィスト（俊敏・刺突）／バーサーカー／ジャガーノート（重装甲）</li>
+          <li><b>ロクヴィル・ゴーレム</b></li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">夜に出る敵（ムスペルヘイム勢）</span>
+        <ul>
+          <li>ダガーファング／エンフォーサー／レギオナリー／ガットナッシャー／ヘルハウンド／ファイアドレイク／ドゥームコーラー／ウォーブリンガー</li>
+          <li>昼夜問わず：ストームブリンガー、嵐の侍祭、氷の門弟、炎の門弟、アイスバット</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">4体のボスと、そのご褒美（オーディンの力）</span>
+        <ul>
+          <li><b>族長ゴル（竜殺し）</b>… ヨタールの要塞の玉座で挑む。力＝<b>所持重量2倍＋剣/ナイフ/弓に氷結ダメージ</b></li>
+          <li><b>嵐の伝令</b>… 嵐の神殿。<b>鍵を作らないと門が開かない</b>。力＝<b>エイトル回復＋呪文/槍/素手/クロスボウに雷ダメージ</b></li>
+          <li><b>攻城王ブルタリス</b>… ムスペルヘイムへの転移門の先。力＝<b>体力回復＋斧/メイス/長柄に火炎ダメージ</b></li>
+          <li><b>シスラク</b>（ニーズヘッグの戦士）… 竜の巣。力＝<b>短時間、与える全ダメージ +40%</b></li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">食べ物が一気に増える</span>
+        <ul>
+          <li>ミートパイ・フィッシュパイ・キノコのタルト（<b>かまどで焼く</b>）、北方のシチュー（体力回復が上がる）、ドラッカル・チリ、ドレイクの辛口オムレツ ほか</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>極北の敵と場所は「まだ行っていない土地」にしか湧かない。</b> 既に探索した極北には出ないので、奥へ進むこと。
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ══════════ 移動 ══════════ -->
+<h2 id="m-move"><span class="n">Mods 02</span>移動・騎乗・見た目</h2>
+
+<div class="mods">
+
+  <article class="mod">
+    <div class="head">
+      <h3>Mount Up Restored</h3><span class="ver">Meldurson / v3.4.4</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>手懐けたどんな生物にも乗れる</b>ようにする。鞍がバイオームごとに8段階あり、見た目も変わる。</p>
+      <div class="block">
+        <span class="lbl">鞍のレシピ（作業台の必要レベルつき）</span>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>段階</th><th>素材</th><th>作業台</th></tr></thead>
+        <tbody>
+          <tr><td class="k">1 草原</td><td>革の切れ端6・鹿の皮4・硬い枝角2・タンポポ10</td><td>作業台 Lv1</td></tr>
+          <tr><td class="k">2 黒い森</td><td>トロールの皮6・鹿の皮4・青銅4・古代の種3</td><td>鍛冶場 Lv1</td></tr>
+          <tr><td class="k">3 沼</td><td>鹿の皮15・古代の樹皮10・鉄6・グーク10</td><td>鍛冶場 Lv2</td></tr>
+          <tr><td class="k">4 山</td><td>狼の毛皮6・鹿の皮4・黒曜石2・銀5・冷凍腺10</td><td>作業台 Lv4</td></tr>
+          <tr><td class="k">5 平地</td><td>ロックスの毛皮6・鹿の皮4・黒金属4・ロックスのトロフィー1・タール5</td><td>鍛冶場 Lv3</td></tr>
+          <tr><td class="k">6 ミストランド</td><td>鱗の皮15・黒曜石6・ユグドラシルの木6・樹液10・エイトル3</td><td>作業台 Lv5</td></tr>
+          <tr><td class="k">7 アッシュランド</td><td>ロックスの毛皮10・モルゲンの心臓2・炎金属6・タール5</td><td>鍛冶場 Lv4</td></tr>
+          <tr><td class="k">8 極北</td><td>狼の毛皮20・鱗の皮10・アイオライト1・冷凍腺50</td><td>工匠のテーブル Lv2</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="block">
+        <span class="lbl">できること</span>
+        <ul>
+          <li><b>乗ったまま攻撃できる</b>（通常の攻撃キーで乗騎が攻撃する）</li>
+          <li>乗ったままジャンプできる</li>
+          <li><b>飛べる生物なら離陸・着陸・空中の操作ができる</b>。スタミナが切れると強制的に着陸して回復する</li>
+          <li>乗騎はポータルで一緒に移動できる</li>
+          <li><b>ゲーム内の生物243種すべてを騎乗リストに登録済み</b>（2026-07-28）。初期設定では狼とイノシシだけだった</li>
+          <li>鞍の位置などは、<b>その生物に初めて出会った時点で自動で設定される</b>。多少ずれることがあるが、直せる</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>「全部乗れる」には条件がある。</b> 乗れるのは<b>手懐けた生物だけ</b>で、Valheim本体では手懐けられる生物が限られている
+        （イノシシ・狼・ロックス・鶏・アスクスヴィン、＋MODが追加したもの）。
+        <b>本来懐かない敵まで手懐けたい</b>なら、それ専用のMOD（AllTameable）を足す必要がある。欲しければ入れる。
+      </div>
+      <div class="callout good">
+        <b>「空を飛ぶ」の土台はこのMOD。</b> ただしバニラには手懐けられる飛行生物がいなかった。
+        そこで下の <b>MagicalMounts</b>（ペガサス・ドラゴン）を追加したので、<b>実際に飛べるようになった</b>。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>MagicalMounts</h3><span class="ver">CookieMilk / v2.4.2</span>
+      <span class="tag new">今回追加</span><span class="tag nojp">名前は英語のまま</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>乗れる生物を大量に足す。ペガサスとドラゴンとカラスは空を飛べる。</b> 今回「空を飛びたい」の答えになるMOD。</p>
+      <div class="block">
+        <span class="lbl">乗れる生物</span>
+        <ul>
+          <li><b>馬</b>6色／<b>アンデッド馬</b>5種（炎・氷・毒・腐敗・宇宙）／<b>鹿</b>8種／<b>狼</b>6種</li>
+          <li><b>ユニコーン</b>（白・黒）／<b>ペガサス</b>（白・黒）／<b>カラス</b>6種／<b>ドラゴン</b>5色</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">手に入れ方</span>
+        <ul>
+          <li><b>野生で出るのは各種2バリエーションだけ</b>。草原＝パロミノ馬とコズミック馬／黒い森＝赤鹿とコズミック鹿／沼＝腐敗アンデッド馬／山＝ティンバーウルフ</li>
+          <li>手懐け方：<b>釜Lv1で「コズミック・トリート」を作る</b> → 忍び寄って足元に落とす → 離れる → ハートが出れば馴れ始め。本来は計30分だが、<b>このサーバーは手懐け時間を半分にしてあるので約15分</b></li>
+          <li>それ以外は<b>召喚アイテム</b>で呼ぶ。<b>召喚書</b>を使えばその生物を恒久的に解放できる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">面白い付属品</span>
+        <ul>
+          <li><b>変身アイテム</b>… 自分がその生物に変身する</li>
+          <li><b>コズミック・セル</b>… 生物を中に収納して持ち運べる</li>
+          <li>どんな生物でも回復できるポーション、ユニコーンの虹の武器</li>
+        </ul>
+      </div>
+      <div class="callout bad">
+        <b>名前は英語のまま。</b> 翻訳を受け付ける仕組みは持っているが、<b>翻訳キーの一覧をDLLから取り出せなかった</b>ので現状は作れない。
+        遊んでみて名前が気になるようなら、ゲーム内で見た名前をもとに作れる。
+      </div>
+      <div class="callout">
+        騎乗系MODが <b>MountUpRestored / OdinHorse / MagicalMounts</b> の3本になった。
+        それぞれ別の仕組みなので競合の宣言は無かったが、<b>最初に遊ぶとき「バニラ生物への騎乗」と「新生物への騎乗」の両方を試してほしい</b>。おかしければ直す。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>ODINFLIGHT</h3><span class="ver">satnteam（原作 Pfhoenix）/ v2.1.1</span>
+      <span class="tag new">今回追加</span><span class="tag nojp">名前は英語のまま</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>クラフトできる「オーディンの翼」を装備して、自分の体で飛ぶ。</b> 乗り物ではなく自力飛行。</p>
+      <div class="block">
+        <span class="lbl">飛び方と性質</span>
+        <ul>
+          <li>走って跳んで<b>羽ばたく</b>。羽ばたきは<b>スタミナを消費</b>する</li>
+          <li><b>風向きと風速が揚力に影響する</b>。天気を見て飛ぶ必要がある</li>
+          <li>バイオームごとに揚力が違い、<b>上昇できる高度に上限がある</b></li>
+          <li><b>翼が濡れると重くなる</b>。雨の日は余計にスタミナを食う</li>
+          <li>マルチ対応（飛行状態が全員に同期される）</li>
+        </ul>
+      </div>
+      <div class="callout">
+        クリエイティブ的な飛行にならないよう、あえて制約を付けた設計。作るための素材や作業台は設定で変えられる。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Transmog（見た目変更）</h3><span class="ver">Alpus / v3.0.1</span>
+      <span class="tag new">今回追加</span><span class="tag jp">最初から日本語</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>性能はそのままで、装備の見た目だけを好きな装備に変えられる。</b> 強い装備の見た目が好みでない、という悩みが消える。</p>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>持ち物を開いてから</b> <kbd>T</kbd> で見た目パネルを開く（持ち物が開いていないと本体のエモートが出る）</li>
+          <li>パネル上でアイテムをクリックすると、<b>同じ種類の装備すべての見た目がそれになる</b></li>
+          <li>もう一度クリックで元に戻る。<b>チェックを入れると、その部位を非表示にできる</b>（兜を消す等）</li>
+          <li><kbd>左Alt</kbd>＋<kbd>=</kbd> で見た目変更のオン／オフを一括切替</li>
+          <li>見た目は<b>キャラクターに保存される</b>ので、ログアウトしても消えない</li>
+        </ul>
+      </div>
+      <div class="callout good">日本語を含む17言語が最初から入っているので、翻訳の作業は不要だった。</div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>OdinHorse</h3><span class="ver">OdinPlus / v1.6.5</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">馬を追加する。手懐けて、乗って、繁殖させて、<b>馬車を引かせられる</b>。</p>
+      <div class="block">
+        <span class="lbl">見つけ方・手懐け方</span>
+        <ul>
+          <li><b>草原に、晴れた日にだけ湧く。</b>意図的にレアにしてある</li>
+          <li>手懐けるエサ＝<b>ブルーベリー・ニンジン・クラウドベリー・大麦</b></li>
+          <li>手懐けと成長にかかる時間は<b>ロックスとほぼ同じ</b></li>
+          <li>毛色と模様に個体差がある</li>
+          <li><b>仔馬はプレイヤーから逃げる</b>ので、繁殖させるときは囲いを作っておくこと</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">装備と操作</span>
+        <ul>
+          <li><b>馬の鞍</b>を作れば乗れる。<b>鉄の馬鎧</b>で体力が上がる（外すのは <kbd>K</kbd>＋使う）</li>
+          <li><kbd>Y</kbd>＋使う で<b>その場で待たせる</b></li>
+          <li><b>馬車</b>を引かせられる</li>
+          <li><b>サドルバッグ</b>（<kbd>B</kbd>）は既定でオフ。使いたければ有効化する。※中身は<b>馬が死ぬと地面に落ちる</b></li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">馬から作れる装備のセット効果</span>
+        <ul>
+          <li><b>ホースエイカー</b>：最大所持重量+25、火耐性、移動速度+5%、騎乗スキル+30</li>
+          <li><b>スコーガルマドル</b>：ジャンプ／走りのスタミナ消費-10%、スタミナ回復+20%、足音-10%、隠密+10%、移動速度+10%、落下ダメージ-25%、ナイフ+20</li>
+          <li><b>ドラープマドル</b>：スコーガルマドルの上位版</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">その他</span>
+        <ul>
+          <li>馬肉から料理が作れる（焼いた馬肉／シャシリク／濃厚スープ／ダークフランクフルト）</li>
+          <li>馬の皮から敷物・マント、頭のトロフィーから兜、<b>ホースエイカー</b>という両手バトルアックスが作れる</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ══════════ 建築 ══════════ -->
+<h2 id="m-build"><span class="n">Mods 03</span>建築・内装・地形</h2>
+
+<div class="mods">
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>FineWood Pieces</h3><span class="ver">blacks7ar / v1.6.5</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">建築パーツを<b>262個</b>追加する。今回入れた中で建築的に一番大きい。</p>
+      <div class="block">
+        <span class="lbl">増えるもの</span>
+        <ul>
+          <li><b>上質な木材版の建築パーツ一式</b>（壁・床・梁・柱・階段・屋根・窓・扉・跳ね上げ扉）</li>
+          <li><b>石の屋根瓦</b>、<b>わらの壁</b>、<b>粘土の建築パーツ</b>（ブロック・円柱・アーチ・タイル・像）</li>
+          <li><b>16種類の収納家具</b>、家具58種、小物23種、窓6種、植木18種、防具立て、柵</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">新しい素材の採り方</span>
+        <ul>
+          <li><b>葦（Reed）</b>：草原と黒い森の<b>水辺</b>に生える。刈ると<b>わら</b>になり、わらの壁と屋根に使う</li>
+          <li><b>粘土（Clay）</b>：草原・黒い森・沼・平地・ミストランドの<b>水際</b>に湧く</li>
+          <li><b>青銅のハンマー</b>を作ると、このMODの建築メニューが開く</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <b>既存ワールドでは、まだ行っていない土地にしか葦と粘土は湧かない。</b> 拠点の周りを探して無ければ、少し遠出すること。
+        「粘土採取機」を建てられる粘土採掘場も同じ理由で新しい土地にしか出ない。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Balrond Furniture Reborn</h3><span class="ver">Balrond / v1.2.6</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">家具と小物を<b>85種以上</b>追加する。バニラの見た目に馴染むよう作られている。<b>設定不要・そのまま使える</b>。</p>
+      <div class="block">
+        <span class="lbl">増えるもの</span>
+        <ul>
+          <li><b>使える収納</b>：黒焦げの魔法の箱（<b>40スロット</b>・専用）、石板の箱、黒大理石の石棺の箱、大貝の箱、ドヴェルグの戸棚（18スロット）</li>
+          <li><b>家具</b>：ドヴェルグ様式／残り火の木／貴族様式のベッド・椅子・テーブル・たんす。<b>棚板を出し入れできる</b>戸棚</li>
+          <li><b>敷物・カーテン・旗</b>：熊／狐／フェンリング／ネックの皮の敷物、優美な絨毯（組み合わせ式で長く繋げられる）、旗12種以上</li>
+          <li><b>照明</b>：水晶のシャンデリア、ろうそくのシャンデリア、石柱の火鉢、吊り火鉢、<b>ルーンの炎</b>（虹色の焚き火）</li>
+          <li><b>像</b>：オーディン、トール、大鴉、狼、鷲</li>
+          <li><b>登れるはしご</b>、飾りのプランター（どんな種でも植えて姿を飾れる）、地面の棘トラップ</li>
+        </ul>
+      </div>
+      <div class="callout good">レシピが分からないときは、下の <b>VNEI</b>（図鑑）で調べられる。</div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>VALKEA Decor</h3><span class="ver">The Bees Decree / v3.0.0</span>
+      <span class="tag new">今回追加</span><span class="tag nojp">日本語化できない</span>
+    </div>
+    <div class="body">
+      <p class="what">内装パーツを追加する。VALKEA という大型MODの<b>家具部分だけ</b>を切り出したもの。</p>
+      <div class="block">
+        <span class="lbl">使い方</span>
+        <ul>
+          <li><b>専用のハンマー「ValkeaTool」を作る</b>と、このMODの建築メニューが開く</li>
+          <li>レシピ＝<b>上質な木材1・鉄1・コイン99</b>。コイン99枚が地味に要る</li>
+        </ul>
+      </div>
+      <div class="callout bad">
+        <b>このMODだけ名前が英語のまま。</b> DLLに翻訳の仕組みが一切なく、パーツ名がデータに直接埋め込まれているため、翻訳ファイルを置いても効かない。
+        調べた上での結論なので、これは直せない。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Groundwork（掘る・耕す道具が強くなる）</h3><span class="ver">sighsorry / v1.0.9</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>つるはし・クワ・耕耘機の「効く範囲」を、自分で変えられるようになる。</b>
+        穴を掘るとき、1回で大きくえぐるか、細かく整えるかを、その場で切り替えられる。
+      </p>
+      <div class="block">
+        <span class="lbl">つるはし</span>
+        <ul>
+          <li><b>掘削サイズをホイールで 1倍〜数倍に変えられる</b>（半径と深さの両方が広がる）</li>
+          <li>大きく掘るほど<b>スタミナと耐久の消費も比例して増える</b>。ただ強くなるのではなく、コストと引き換え</li>
+          <li>装備中は画面下のキーヒントに<b>今のサイズが出る</b></li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">クワ・耕耘機</span>
+        <ul>
+          <li>作用範囲を<b>ホイールで拡大・縮小</b>できる。今の半径は「半径：〇m」と表示される</li>
+          <li><b>グリッドのプレビューが出る</b>ので、どのマスが変わるか置く前に分かる</li>
+          <li>既定では<b>自分が立っている高さ</b>に合わせる。<kbd>Shift</kbd>＋クリックで<b>狙った地面の高さ</b>に合わせる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">おまけ（農業まわり）</span>
+        <ul>
+          <li><b>大鎌で作物を一括収穫</b>できる（畑を薙ぐように刈れる）</li>
+          <li><b>まとめ植え・整列植え</b>。農業スキルが上がるほど一度に植えられる数が増える</li>
+          <li><b>受粉と雨で作物の成長が速くなる</b>。狙ったときの残り時間も表示される</li>
+          <li>蜂の巣が強化され、<b>覆い・受粉・夜/雨の影響・次の蜂蜜までの時間</b>が見える</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>MoreTerrainTypes（地面の種類を増やす）</h3><span class="ver">JamesJonesTV / v1.0.3</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>耕耘機で、他のバイオームの地面を塗れるようになる。</b> 整地したあとの見た目を作り分けられる。</p>
+      <div class="block">
+        <span class="lbl">塗れる地面</span>
+        <ul>
+          <li><b>雪</b>／<b>溶岩</b>／<b>灰</b>（アッシュランド）／<b>沼</b>／<b>平地の草</b>／<b>黒い森の草</b>／<b>草原の草</b></li>
+          <li><b>ミストランドの草・土</b>／<b>苔むした石畳</b>／<b>黒い石畳</b></li>
+          <li><b>「すべて元に戻す」</b>もある（地面の塗り・草木・高さの変更をまとめて戻す）</li>
+        </ul>
+      </div>
+      <div class="callout">レシピは既定で無料。拠点を雪原にしたり、溶岩の道を作ったりできる。</div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Heightmap Unlimited</h3><span class="ver">Digitalroot / v1.4.1</span>
+      <span class="tag jp">翻訳対象なし</span>
+    </div>
+    <div class="body">
+      <p class="what">バニラでは地面を上げ下げできる高さが<b>元の地形から8m</b>までに制限されている。それを取り払う。</p>
+      <div class="block">
+        <span class="lbl">この鯖の設定</span>
+        <ul>
+          <li>上げられる高さ：<b>200m</b>／掘り下げられる深さ：<b>200m</b></li>
+          <li>山を削って平らにする、谷を埋める、堀を掘る、といったことが制限なくできる</li>
+        </ul>
+      </div>
+      <div class="callout">地形は<b>ワールドデータそのもの</b>。派手にやると元に戻せない。念のため、ワールドのバックアップはサーバー側で自動的に取ってある。</div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ══════════ 生活 ══════════ -->
+<h2 id="m-life"><span class="n">Mods 04</span>生活の便利さ</h2>
+
+<div class="mods">
+
+  <article class="mod">
+    <div class="head">
+      <h3>ValheimPlus</h3><span class="ver">Grantapher版 / v9.17.1</span>
+      <span class="tag jp">翻訳対象なし</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        このサーバーの<b>土台</b>。数百項目の設定でゲームの数値をまるごと調整する。
+        上の「バニラと何が違うか」の表は、ほぼ全部このMODの設定。
+      </p>
+      <div class="block">
+        <span class="lbl">大事な性質</span>
+        <ul>
+          <li><b>設定はサーバーから全員に自動で配られる</b>。手元の設定ファイルをいじっても、接続すると上書きされる</li>
+          <li>逆に言えば<b>全員の条件が必ず揃う</b>。誰かだけ有利になることがない</li>
+          <li>キー割り当てだけは各自の手元の設定が生きる（<span class="num">serverSyncHotkeys = false</span>）</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">見落としがちな便利機能</span>
+        <ul>
+          <li><b>高度建築モード</b>（<kbd>F2</kbd>）：置く前の物をミリ単位で動かす・回す</li>
+          <li><b>高度編集モード</b>（<kbd>Num0</kbd>）：<b>もう置いてある物</b>を後から動かす。建て直し不要</li>
+          <li><b>自由回転</b>（建築中に <kbd>Alt</kbd> <kbd>C</kbd> <kbd>Z</kbd>）：斜めの梁や傾けた装飾が置ける</li>
+          <li><b>角度のコピー</b>（<kbd>F</kbd> <kbd>G</kbd>）：狙った物と同じ角度で置く</li>
+          <li><b>範囲修理</b>：ハンマーで1回叩けば半径7.5m全部が直る</li>
+          <li><b>一人称視点</b>（<kbd>V</kbd>）</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>AzuCraftyBoxes</h3><span class="ver">Azumatt / v1.8.14</span>
+      <span class="tag jp">表示文字がほぼ無い</span>
+    </div>
+    <div class="body">
+      <p class="what"><b>近くの箱に入っている素材を、取り出さずにそのまま使ってクラフト・建築できる</b>。作業台の周りに箱を並べておけば、素材集めの往復が消える。</p>
+      <div class="block">
+        <span class="lbl">この鯖の設定と使い方</span>
+        <ul>
+          <li>箱を探す範囲：<b>50m</b>（20mから拡大した）</li>
+          <li>箱から素材が使われるときは、必要数の表示が<b>黄色に点滅</b>する。これが「箱から引いている」合図</li>
+          <li><b>箱の中に1個だけ残す</b>設定になっている。これは他の収納MODと組み合わせたときに箱の種類が分からなくならないようにするため</li>
+          <li><kbd>Shift</kbd>を押しながら使うと、かまど・製錬炉に<b>燃料や鉱石を一気に入れられる</b></li>
+          <li>Epic Loot のエンチャント台にも対応している</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>QuickStackStore</h3><span class="ver">Goldenrevolver / v1.4.13</span>
+      <span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">持ち物の整理を一手に引き受ける。<b>収納・補充・並べ替え・破棄</b>の4つがボタンとキーの両方から使える。</p>
+      <div class="block">
+        <span class="lbl">4つの機能</span>
+        <ul>
+          <li><b>まとめて収納</b>（<kbd>P</kbd>）：<b>その物が既に入っている箱にだけ</b>入る。だから拠点で押せば勝手に片付く</li>
+          <li><b>補充</b>（<kbd>L</kbd>）：矢・食料などを近くの箱から満タンまで戻す。出かける前に押す</li>
+          <li><b>並べ替え</b>（<kbd>O</kbd>）：名前・価値・重さ・種類から選べる</li>
+          <li><b>捨てる</b>（<kbd>Delete</kbd>）：持っている物を捨てる。「捨てる」印を付けた物をまとめて捨てることもできる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">お気に入り（これが肝）</span>
+        <ul>
+          <li><kbd>Alt</kbd>＋<b>左クリック</b>で<b>アイテム</b>を、<kbd>Alt</kbd>＋<b>右クリック</b>で<b>枠</b>をお気に入りにする</li>
+          <li>お気に入りにした物は<b>収納・並べ替え・全部しまう・捨てるの対象外</b>になる。ハンマーや大事な装備を守れる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">「捨てる」印の付け方</span>
+        <ul>
+          <li>持ち物を開くと<b>ゴミ箱</b>が出る。<b>捨てたいアイテムをゴミ箱の上に重ねた状態で <kbd>Alt</kbd>＋左クリック</b>すると「捨てる」印が付く</li>
+          <li>印を付けておくと、<kbd>Delete</kbd> で<b>印の付いたものだけをまとめて捨てられる</b>（毎回選ばなくていい）</li>
+          <li>設定でトロフィーを常に「捨てる」扱いにすることもできる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">枠の色の意味</span>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>枠の色</th><th>意味</th></tr></thead>
+        <tbody>
+          <tr><td class="k"><b style="color:#B8A000">黄色</b></td><td><b>お気に入りのアイテム</b>。そのアイテムが守られる（別の枠へ移しても付いてくる）</td></tr>
+          <tr><td class="k"><b style="color:#0080FF">青</b></td><td><b>お気に入りの枠</b>。そのマスに入っている物が何であれ守られる</td></tr>
+          <tr><td class="k"><b style="color:#5E8F5E">緑</b></td><td>お気に入りの枠に、お気に入りのアイテムが入っている状態</td></tr>
+          <tr><td class="k"><b style="color:#B03030">暗い赤</b></td><td><b>「捨てる」印</b>が付いたアイテム</td></tr>
+          <tr><td class="k"><b>黒</b></td><td>お気に入りの枠に、「捨てる」印のアイテムが入っている状態</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="callout">
+        <b>他人が開いている箱には収納できない。</b> 複数人で同時に触ると壊れるのを防ぐための安全装置。船の箱は特に厳しめ（皆が開け閉めするため）。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Auto Fuel</h3><span class="ver">aedenthorn / v1.2.0</span>
+      <span class="tag jp">翻訳対象なし</span>
+    </div>
+    <div class="body">
+      <p class="what">かまど・松明・製錬炉・炭焼き窯が、<b>近くの箱や地面から燃料と鉱石を勝手に吸い上げる</b>。</p>
+      <div class="block">
+        <span class="lbl">使い方（2通り）</span>
+        <ul>
+          <li>製錬炉の近くに箱を置いて、そこに<b>石炭・木・鉱石を入れておく</b>。勝手に補給される</li>
+          <li>あるいは<b>地面に落としておくだけ</b>でもいい</li>
+          <li>効く距離は既定で<b>5m</b>（かまど／製錬炉の鉱石／製錬炉の燃料でそれぞれ別に設定できる）</li>
+        </ul>
+      </div>
+      <div class="callout good">松明にも効く。<b>拠点の松明が消える問題がなくなる</b>のが地味に大きい。</div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Plant Everything</h3><span class="ver">Advize / v1.20.0</span>
+      <span class="tag jp">対応不要</span>
+    </div>
+    <div class="body">
+      <p class="what">バニラでは植えられない物を<b>耕耘機（カルチベーター）で植えられる</b>ようにする。<b>レシピが29個</b>増える。</p>
+      <div class="block">
+        <span class="lbl">植えられるようになるもの</span>
+        <ul>
+          <li><b>ベリーの木</b>（ブルーベリー・ラズベリー・クラウドベリー）、<b>アザミ</b>、<b>タンポポ</b>、<b>キノコ類</b></li>
+          <li>バニラでは植えられなかった<b>各種の苗木</b>、小さな木、低木、<b>壁に生やせるツタ</b></li>
+          <li>植えた物は<b>時間で再生する</b>ので、採り場を自分で作れる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">覚えておくと便利</span>
+        <ul>
+          <li><b>成長までの残り時間が、狙うと表示される</b>（作物・苗木・採取物すべて）</li>
+          <li><b>邪魔な小枝・小石・火打石を消せる</b>：耕耘機を持って狙い、<b>解体キー（既定は中クリック）</b>を押す。拠点周りに湧き続けるゴミが片付く</li>
+          <li>レシピは<b>材料を1個手に入れた時点で解放</b>される（バニラと同じ流儀）</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>AllTameable（敵も手懐けられる）</h3><span class="ver">Meldurson / v1.5.4</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>本来は懐かない敵まで手懐けられるようにする。</b>
+        MountUpRestored と同じ作者なので、騎乗との相性がいい。
+      </p>
+      <div class="block">
+        <span class="lbl">手懐けられるようになったもの（76種）</span>
+        <ul>
+          <li>雑魚：灰色小人・ネック・骸骨・スケルトン・サートリング・ブロブ・ドラウグル・幽霊・ヒル・ワイト・デスクィート・コウモリ ほか</li>
+          <li>強敵：トロール・シーカー・シーカーブルート・ギャル・ゴブリン各種・ストーンゴーレム・ドヴェルグ各種・アボミネーション・フェンリング・海蛇・モルゲン・<b>フォールン・ヴァルキリー</b></li>
+          <li><b>ボス全部</b>：エイクスュル／エルダー／ボーンマス／モデル／ヤグルース／シーカークイーン／フェーダー</li>
+        </ul>
+      </div>
+      <div class="callout good">
+        <b>これで「全部乗れる」が本当になった。</b> 生物243種を騎乗リストに登録済みなので、
+        手懐けた相手には鞍を着ければ乗れる。<b>ボスに乗ることもできる</b>。
+      </div>
+      <div class="block">
+        <span class="lbl">手懐けを助ける道具（このMODが追加する）</span>
+        <ul>
+          <li><b>手懐けの杖</b>… 持っていると、その生物を手懐ける条件が見える（何を食べるか・何分かかるか）</li>
+          <li><b>手懐けのワンド</b>… 手懐けの操作が遠くから届く</li>
+          <li><b>手懐け餌 3段階</b>… 与えると手懐け時間が短くなる（基本／上等／極上）</li>
+          <li><b>手懐けのポーション</b>… 飲むと周囲の生物すべての手懐け時間が短くなる</li>
+          <li><b>鎮めの手袋</b>… 手懐けられる生物に警戒されにくくなる</li>
+          <li><b>手懐けの帽子</b>… 生物の能力値（速さ・体力・防御・大きさ）が見える</li>
+          <li><b>獣統べの衣</b>… 自分の攻撃力を分け与えて、手懐けた生物を強くする</li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">号令</span>
+        <ul>
+          <li><kbd>U</kbd>で号令、<kbd>I</kbd>で号令の対象を切り替える</li>
+          <li>対象は<b>同種だけ／繁殖できる相手も／範囲内すべて</b>から選べる。「ついてこい」「そこで待て」を一括で出せる</li>
+        </ul>
+      </div>
+      <div class="callout">
+        手懐けにかかる時間はサーバー設定で<b>半分</b>にしてある。強い敵ほど元の時間が長いので、それでも根気は要る。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>VNEI（アイテム図鑑）</h3><span class="ver">MSchmoecker / v0.17.5</span>
+      <span class="tag new">今回追加</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>ゲーム内の全アイテムと全レシピを検索できる図鑑。</b>
+        MODが28個も入っていると「これ何で作るんだ」「この素材どこで採れるんだ」が分からなくなるので入れた。
+      </p>
+      <div class="block">
+        <span class="lbl">できること</span>
+        <ul>
+          <li>アイテム名で検索して、<b>作り方（レシピ）と必要な作業台</b>を見る</li>
+          <li>逆引きもできる：ある素材を選ぶと、<b>それを使う物が全部出る</b></li>
+          <li><b>どの敵が落とすか</b>も分かる</li>
+          <li>MODが追加したアイテムも全部載る（Therzie の武器も家具も極北の素材も）</li>
+        </ul>
+      </div>
+      <div class="callout good">
+        今日の追加分は、Wikiに載っていない物ばかり。これが無いと手探りになるので、実質必須。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head">
+      <h3>Clock Mod</h3><span class="ver">aedenthorn / v1.6.0</span>
+      <span class="tag jp">翻訳対象なし</span>
+    </div>
+    <div class="body">
+      <p class="what">画面の上中央に<b>ゲーム内の時刻</b>を出す。<kbd>Home</kbd> で表示／非表示。</p>
+      <div class="block">
+        <span class="lbl">この鯖では</span>
+        <ul>
+          <li>表示位置：画面の <span class="num">50%, 3%</span>（上中央）</li>
+          <li><b>1日が60分</b>と長いので、時計があると「あと何分で夜か」が読める。夜は全体の15%＝<b>約9分</b></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- ══════════ 土台 ══════════ -->
+<h2 id="m-core"><span class="n">Mods 05</span>土台（意識しなくていいもの）</h2>
+<p class="section-note">
+  他のMODを動かすための部品。単体では何もしない。ただし<b>バージョンが全員で揃っていないと入室を弾かれる</b>ので、消さないこと。
+</p>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>名前</th><th>版</th><th>役割</th></tr></thead>
+  <tbody>
+    <tr><td class="k">BepInEx</td><td class="num">5.4.2333</td><td>MODを読み込む仕組みそのもの。<span class="num">winhttp.dll</span> の正体はこれ</td></tr>
+    <tr><td class="k">Jotunn</td><td class="num">2.29.2</td><td>MODが新しいアイテム・建築物・敵を登録するための共通ライブラリ</td></tr>
+    <tr><td class="k">JsonDotNET</td><td class="num">13.0.4</td><td>設定ファイルの読み書き</td></tr>
+    <tr><td class="k">ConfigurationManager</td><td class="num">18.4.1</td><td>ゲーム中に <kbd>F1</kbd> で設定パネルを開く。<b>ここの項目名だけは日本語にできない</b>（DLLに埋め込まれているため）</td></tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- ══════════ 実績・ランキング ══════════ -->
+<h2 id="m-rank"><span class="n">Mods 07</span>実績・ランキング・報酬</h2>
+<p class="section-note">
+  2026-07-28 に追加した <b>Almanac</b> が、このサーバーに「競争」と「ご褒美」を持ち込む。
+  順位も実績も、全員の分がサーバー経由で同期される。
+</p>
+
+<div class="mods">
+  <article class="mod is-new">
+    <div class="head">
+      <h3>Almanac（実績・ランキング・賞金首・宝探し）</h3><span class="ver">RustyMods / v3.7.8</span>
+      <span class="tag new">今回追加</span><span class="tag jp">日本語化済</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>アルマナック＝この世界の図鑑であり、成績表であり、賞金稼ぎの掲示板。</b>
+        画面のボタンから開くと、下のタブが並んでいる。
+      </p>
+
+      <div class="block">
+        <span class="lbl">① ランキング（誰が一番か）</span>
+        <ul>
+          <li><b>全員の記録が並んで順位が出る。</b>敵の撃破数・掘り切った鉱脈・航海距離・歩いた距離・空中の距離・
+              手懐けた数・死亡回数・拾ったアイテム・拠点で過ごした時間 など</li>
+          <li>「記録」タブでは<b>自分の全数値</b>が見られる。落下死・溺死・凍死といった<b>死因別の回数</b>まで残る</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <span class="lbl">② 実績（達成するとトークンがもらえる）</span>
+        <ul>
+          <li>もともと44個の実績が入っており、そこへ<b>このサーバー専用の20個を追加</b>した</li>
+          <li>達成すると<b>アルマナックトークン</b>がもらえる。これが報酬の通貨になる</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>ジャンル</th><th>追加した実績</th><th>条件</th><th>トークン</th></tr></thead>
+        <tbody>
+          <tr><td class="k">討伐</td><td>Slayer I / II / III</td><td class="num">敵を 100 / 500 / 2000 体</td><td class="num">25 / 60 / 150</td></tr>
+          <tr><td class="k">採掘</td><td>Digger I / II / III</td><td class="num">鉱脈を 500 / 3000 / 15000</td><td class="num">25 / 60 / 150</td></tr>
+          <tr><td class="k">航海</td><td>Sailor I / II</td><td class="num">5万 / 25万</td><td class="num">25 / 80</td></tr>
+          <tr><td class="k">探索</td><td>Wanderer I / II</td><td class="num">徒歩 10万 / 50万</td><td class="num">25 / 80</td></tr>
+          <tr><td class="k">飛行</td><td>Skyborne</td><td class="num">空中で 2万</td><td class="num">50</td></tr>
+          <tr><td class="k">テイム</td><td>Tamer I / II</td><td class="num">15体 / 40体</td><td class="num">40 / 120</td></tr>
+          <tr><td class="k">食・釣り</td><td>Angler / Feaster</td><td class="num">60回食べる / 消耗品を網羅</td><td class="num">40 / 30</td></tr>
+          <tr><td class="k">拠点</td><td>Homesteader</td><td class="num">拠点で 18000秒</td><td class="num">30</td></tr>
+          <tr><td class="k">収集</td><td>Trophy Hunter / Hoarder</td><td class="num">トロフィー網羅 / 貴重品網羅</td><td class="num">80 / 50</td></tr>
+          <tr><td class="k">ネタ</td><td>Unkillable? / Hopper</td><td class="num">50回死ぬ / 3000回跳ぶ</td><td class="num">30 / 20</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="block">
+        <span class="lbl">③ 宝箱（トークンで買う。中身は毎回ちがう）</span>
+        <ul>
+          <li>買うと<b>指定のバイオームに宝の在り処が出る</b>。行って開けると中身が手に入る</li>
+          <li><b>中身は抽選表なので、同じ宝箱でも毎回ちがうものが出る</b>。ジャンル別に8種類を用意した</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>宝箱</th><th>費用</th><th>出るもの（抽選）</th></tr></thead>
+        <tbody>
+          <tr><td class="k">戦士の隠し箱</td><td class="num">8</td><td>鉄・銀・黒金属・鎖・トロフィー・コイン</td></tr>
+          <tr><td class="k">採掘者の隠し箱</td><td class="num">8</td><td>黒曜石・銀・水晶・タール・コイン・青の宝石</td></tr>
+          <tr><td class="k">船乗りの隠し箱</td><td class="num">8</td><td>海蛇の鱗・コイン・琥珀の真珠・銀の首飾り・魚・キチン</td></tr>
+          <tr><td class="k">農夫の隠し箱</td><td class="num">5</td><td>大麦・亜麻・ニンジン・カブ・玉ねぎ・蜂蜜・女王蜂</td></tr>
+          <tr><td class="k">建築家の隠し箱</td><td class="num">6</td><td>上質な木材・石・鉄の釘・樹脂・タール・黒大理石</td></tr>
+          <tr><td class="k">狩人の隠し箱</td><td class="num">8</td><td>ロックス/狼/鹿/トロールの皮・鱗の皮・羽根</td></tr>
+          <tr><td class="k">極北の隠し箱</td><td class="num">15</td><td>ティラニウム・ラグノライト・ソラダス・黒氷・ドレイクの鱗・魔法のルーン3種</td></tr>
+          <tr><td class="k">運試しの箱</td><td class="num">10</td><td>コイン大量・ルビー・琥珀の真珠・銀の首飾り・宝石3色・トークン</td></tr>
+          <tr><td class="k"><b>黄金の宝箱</b></td><td class="num">30</td><td><b>レア装備を作れるルーン石。0.1%でレジェンダリー、0.01%でミシック</b>（下の表）</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+
+      <div class="block">
+        <span class="lbl">黄金の宝箱 — レア装備がほしい人へ</span>
+        <ul>
+          <li>出てくるのは<b>ルーン石</b>。エンチャント台で使うと、<b>自分が選んだ装備</b>がその等級の魔法装備になる</li>
+          <li>「当たったのに使わない武器だった」が起きない。<b>好きな装備に当てられる</b></li>
+        </ul>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>出るもの</th><th>確率</th><th>できること</th></tr></thead>
+        <tbody>
+          <tr><td class="k">マジックのルーン石 ×1〜2</td><td class="num">60%</td><td>装備1つをマジックにする</td></tr>
+          <tr><td class="k">レアのルーン石</td><td class="num">25%</td><td>装備1つをレアにする</td></tr>
+          <tr><td class="k">エピックのルーン石</td><td class="num">10%</td><td>装備1つをエピックにする</td></tr>
+          <tr><td class="k">コイン 500〜1500</td><td class="num">4.89%</td><td>—</td></tr>
+          <tr><td class="k"><b>レジェンダリーのルーン石</b></td><td class="num"><b>0.1%</b></td><td><b>装備1つをレジェンダリーにする</b></td></tr>
+          <tr><td class="k"><b>ミシックのルーン石</b></td><td class="num"><b>0.01%</b></td><td><b>装備1つを最上級のミシックにする</b>（1万回に1回）</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="callout good">
+        <b>宝箱の中身は実在を確認済み。</b> 8種の抽選表に書いた<b>57アイテムすべて</b>を、
+        Valheim公式のアイテム一覧（1,085件）と各MODの設定ファイルに突き合わせて照合した。<b>存在しない名前はゼロ</b>。
+        つまり「抽選に当たったのに何も出ない」ことは起きない。
+      </div>
+      <div class="block">
+        <span class="lbl">④ 賞金首（繰り返し稼げる）</span>
+        <ul>
+          <li>コインで契約を買うと、<b>強化された指定の敵</b>が出現する（例：アボミネーション＝体力1600・Lv3・ダメージ1.5倍）</li>
+          <li>倒すとトークンと戦利品。<b>自動生成をONにしてある</b>ので、毎回ちがう相手が並ぶ</li>
+          <li>横取りされたり、逃げられたりすることもある</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <span class="lbl">⑤ 宝くじ・マーケット・ストア</span>
+        <ul>
+          <li><b>宝くじ</b>：トークン1枚でスロットを回す。<b>3つ揃えば10トークン</b>。
+              絵柄は<b>8種類</b>まで減らしてあるので、そこそこ当たる（初期値は26種類で、ほぼ当たらなかった）。
+              <b>大当たりは全員に通知される</b>。出るのは<b>トークンだけ</b>で、アイテムは出ない</li>
+          <li><b>マーケット</b>：<b>プレイヤー同士でアイテムを売買できる</b>。値段を決めて出品する</li>
+          <li><b>ストア</b>：トークンで<b>確実に</b>欲しいものと交換。アイテムのほか<b>バフ（状態効果）</b>も買える</li>
+          <li><b>修練の霊薬</b>（5トークン）を追加した。<b>30分のあいだ、あらゆるスキルの伸びが1.5倍</b>になる</li>
+          <li>トークンは<b>コインにも両替できる</b>（レート50）</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <span class="lbl">⑥ 図鑑としても使える</span>
+        <ul>
+          <li>全アイテム・全建築物・全生物のデータが載る。<b>生物の耐性と弱点</b>、<b>何を落とすか</b>も分かる</li>
+          <li>クエスト画面は <kbd>F9</kbd></li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <b>実績を達成すると全員に通知が出る設定</b>にしてある。誰が何を達成したかがその場で分かるので、競争になる。
+      </div>
+      <div class="callout good">
+        <b>順位はサーバーに残る。</b> 各自がログインしたときとセーブしたときに、成績がサーバーの
+        <span class="num">KigyodoWorld.Leaderboard.dat</span> へ書き込まれる。
+        これを使って<b>毎日の報酬を順位で自動的に切り替えている</b>（→ <a href="#rank-how">報酬の回り方</a>）。<br>
+        なお、時間が来たら画面に順位を発表する機能はMOD側に無い。順位はいつでもランキングのタブで見られる。
+      </div>
+    </div>
+  </article>
+
+  <article class="mod is-new">
+    <div class="head">
+      <h3>ServerRewards（毎日もらえる報酬）</h3><span class="ver">Forteca / v420.2.3</span>
+      <span class="tag new">今回追加</span>
+    </div>
+    <div class="body">
+      <p class="what">
+        <b>24時間ごとに1回、報酬を受け取れる。</b> 受け取るたびに翌日の中身が変わり、
+        <b>28日分</b>が一巡する。毎日ログインする理由になる。
+      </p>
+      <div class="block">
+        <span class="lbl">このサーバーで用意した28日分（通常）</span>
+        <ul>
+          <li><b>1〜6日目</b>：木材50／石50／樹脂20／火打石20／羽根15／革の切れ端20</li>
+          <li><b>7日目（節目）</b>：<b>コイン200</b></li>
+          <li><b>8〜13日目</b>：上質な木材40／石炭30／ニンジン10／蜂蜜20／鉄の釘30／鹿の皮20</li>
+          <li><b>14日目（節目）</b>：<b>ルビー3</b></li>
+          <li><b>15〜20日目</b>：銅鉱石30／錫鉱石30／鉄15／鎖2／トロールの皮10／黒曜石20</li>
+          <li><b>21日目（節目）</b>：<b>銀の首飾り2</b></li>
+          <li><b>22〜27日目</b>：銀20／黒金属20／水晶10／ユグドラシルの木20／鱗の皮15／タール25</li>
+          <li><b>28日目（節目）</b>：<b>青の宝石1</b></li>
+        </ul>
+      </div>
+      <div class="block">
+        <span class="lbl">上位の報酬表も用意してある（4段階）</span>
+        <ul>
+          <li><b>通常</b>…上の表</li>
+          <li><b>PREMIUM</b>…通常の約3倍の量</li>
+          <li><b>EPIC</b>…序盤からコイン・鉄・銀・黒金属・エイトル・炎金属・宝石が並ぶ</li>
+          <li><b>LEGENDARY</b>…<b>極北の金属（ティラニウム／ラグノライト／ソラダス）や魔法のルーン</b>、
+              最終日は<b>コイン10,000</b></li>
+          <li>誰がどの段階になるかは<b>毎朝5時のランキング集計で自動的に決まる</b>（→ <a href="#rank-how">報酬の回り方</a>）</li>
+        </ul>
+      </div>
+      <div class="callout good">
+        報酬に書いたアイテム名は<b>全部、実在を機械照合してから</b>入れてある。
+        「受け取ったのに何も入っていない」は起きない。
+      </div>
+      <div class="block">
+        <span class="lbl">ランキング上位の人に、良い報酬が渡る（自動）</span>
+        <ul>
+          <li>誰がどの段階になるかは<b>名簿で決まる</b>。名簿に載っていない人は「通常」</li>
+          <li><b>毎日 朝5時に、サーバーが自分でランキングを集計して名簿を書き換える。</b>
+              1位が LEGENDARY、2位が EPIC、3位が PREMIUM になる</li>
+          <li>誰かのPCが起動している必要は無い。<b>サーバーの中で完結している</b></li>
+          <li>くわしくは <a href="#rank-how">報酬の回り方</a></li>
+        </ul>
+      </div>
+      <div class="callout bad">
+        <b>このMODの作者が、自分のSteamIDを名簿に最初から書き込んでいた。</b>
+        「このMODを入れた全サーバーで、自分は常に最上位の報酬をもらえる」という仕込み。
+        <b>導入時に削除済み</b>。今の名簿は空（＝全員が通常報酬）。
+      </div>
+    </div>
+  </article>
+</div>
+
+
+
+<!-- ══════════ 報酬の回り方 ══════════ -->
+<h2 id="rank-how"><span class="n">System</span>ランキングで報酬が変わる仕組み</h2>
+<p class="section-note">
+  順位が上の人ほど、毎日の報酬が良くなる。<b>誰かが操作しなくても、サーバーが毎朝ひとりでに切り替える。</b>
+</p>
+
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th style="width:22%">順位</th><th style="width:26%">その日からの報酬</th><th>中身のちがい</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>1位</b></td><td class="k"><b>LEGENDARY</b></td><td>極北の金属（ティラニウム／ラグノライト／ソラダス）、魔法のルーン、最終日は<b>コイン10,000</b></td></tr>
+    <tr><td class="k"><b>2位</b></td><td class="k"><b>EPIC</b></td><td>序盤からコイン・鉄・銀・黒金属・エイトル・炎金属・宝石が並ぶ</td></tr>
+    <tr><td class="k"><b>3位</b></td><td class="k"><b>PREMIUM</b></td><td>通常の約3倍の量</td></tr>
+    <tr><td class="k">4位以下</td><td class="k">通常</td><td>木材・石・樹脂などから始まる28日分</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:30px">順位の決まり方</h3>
+<p class="section-note" style="margin-bottom:10px">
+  アルマナックが使っているのと<b>同じ式</b>で計算している。
+</p>
+<div class="callout good">
+  <b>順位点 ＝ 達成した実績の数 ＋（倒した数 ÷ 死んだ数）</b><br>
+  実績を積んでも上がるし、死なずに戦っても上がる。<b>死ぬと下がる</b>ので、無茶をしすぎると順位を落とす。
+</div>
+
+<h3 style="margin-top:30px">いつ・どうやって切り替わるか</h3>
+<ol class="steps">
+  <li><b>遊ぶ。</b>ログインしたときとセーブしたときに、自分の成績がサーバーへ送られる</li>
+  <li><b>毎日 朝5時（日本時間）</b>、サーバーが全員の成績を読んで順位を出す</li>
+  <li><b>1位・2位・3位の名簿が自動で書き換わる。</b>その人の日替わり報酬が翌日から良くなる</li>
+  <li>誰のPCも起動している必要は無い。<b>サーバーの中だけで完結している</b></li>
+</ol>
+<div class="callout">
+  <b>報酬は24時間に1回、自分で受け取りに行く。</b>受け取るたびに翌日の中身が変わり、28日で一巡する。
+  順位が変わっても<b>進んだ日数はそのまま</b>で、その日以降の中身の等級だけが変わる。
+</div>
+
+<!-- ══════════ スキル ══════════ -->
+<h2 id="skills"><span class="n">System</span>スキルを早く上げる</h2>
+<p class="section-note">
+  ヴァルヘイムのスキルは使って上げるものだが、このサーバーには<b>伸びを速くする手段が3つ</b>ある。
+</p>
+
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th style="width:26%">手段</th><th style="width:20%">効き方</th><th>中身</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="k"><b>サーバー全体の設定</b></td><td class="k">常時</td>
+      <td>全24スキルの経験値が<b>+25%</b>。何もしなくてもバニラより速い</td>
+    </tr>
+    <tr>
+      <td class="k"><b>魔法装備</b><br><span class="num" style="font-size:.8rem">EpicLoot</span></td><td class="k">装備中</td>
+      <td><b>スキルの数値そのものが上がる。</b>下の表を参照</td>
+    </tr>
+    <tr>
+      <td class="k"><b>修練の霊薬</b><br><span class="num" style="font-size:.8rem">ストア 5トークン</span></td><td class="k">30分</td>
+      <td>あらゆるスキルの<b>伸びが1.5倍</b>になる</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:30px">魔法装備で上がるスキル</h3>
+<p class="section-note" style="margin-bottom:10px">
+  拾った魔法装備に付いていることがある。<b>エンチャント台で狙って付けることもできる</b>ので、運任せではない。
+</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">付く場所</th><th>上がるスキル</th><th style="width:30%">上がり幅</th></tr></thead>
+  <tbody>
+    <tr><td class="k">武器</td><td>剣・斧・棍棒・ナイフ・槍・矛槍・弓・クロスボウ・格闘・受け・つるはし</td>
+        <td class="num">マジック +1〜3<br>レア +2〜6<br>エピック +3〜9<br>レジェンダリー +4〜12<br>ミシック +5〜15</td></tr>
+    <tr><td class="k">脚・装飾</td><td>走る・跳ぶ・泳ぐ・忍び（まとめて上がる）</td><td class="num">同上</td></tr>
+    <tr><td class="k">胴・脚・肩・装飾</td><td>製作・調理・農業（まとめて上がる）</td><td class="num">マジック +1〜3 …<br>レジェンダリー +6〜12</td></tr>
+    <tr><td class="k">兜</td><td>スキルの<b>経験値</b>そのものが増える</td><td class="num">+1%〜+15%</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout">
+  <b>死ぬとスキルは下がる。</b>このサーバーは死亡時のスキル低下をバニラのままにしてある。
+  上げた分を失いたくなければ、無理な深追いをしないこと。
+</div>
+
+<!-- ══════════ 対訳 ══════════ -->
+<h2 id="translate"><span class="n">Reference</span>英語のまま出る画面の対訳</h2>
+<p class="section-note">
+  MODによっては、画面の文言が<b>プログラムの中に直接書き込まれていて</b>、翻訳ファイルでは置き換えられない。
+  そこを日本語にはできないので、代わりに<b>ここに対訳を置く</b>。ゲームの画面と見比べてほしい。
+</p>
+
+<h3 style="margin-top:24px">アルマナックを開いたときの右側の文章</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th style="width:50%">画面に出る英語</th><th>意味</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Welcome to Rusty's Almanac, your gateway to the enchanting world of Valheim!</td>
+      <td>ようこそ、ラスティのアルマナックへ。ここはヴァルヘイムという魅惑の世界への入口だ。</td>
+    </tr>
+    <tr>
+      <td>Within these runes lie the names of every item, piece, and creature that walks this realm, recorded so no secret is lost to wandering souls.</td>
+      <td>このルーンの中には、この地に在るすべてのアイテム・建築物・生き物の名が記されている。さまよう魂に秘密が失われぬように。</td>
+    </tr>
+    <tr>
+      <td>With this lore at your side, you may chart the unknown and face the trials of the world with wisdom in hand.</td>
+      <td>この知識を携えれば、未知を切り拓き、知恵を手にこの世界の試練に立ち向かえる。</td>
+    </tr>
+    <tr>
+      <td>Yet the Almanac is more than record-keeping — it is a hall of deeds. Through sagas of achievement and the clash of rivals upon the leaderboard, each warrior may carve their own legend.</td>
+      <td>だがアルマナックは記録帳にとどまらない。ここは功績の広間だ。実績という叙事詩と、順位表での競い合いを通じて、戦士はそれぞれの伝説を刻む。</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:28px">アルマナックの操作</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>画面に出る英語</th><th>意味</th></tr></thead>
+  <tbody>
+    <tr><td>Hold <b>Left Alt</b> to drag window</td><td><kbd>左Alt</kbd>を押しながらで、ウィンドウを動かせる</td></tr>
+    <tr><td><b>Tab</b> to return to inventory</td><td><kbd>Tab</kbd>で持ち物へ戻る</td></tr>
+    <tr><td><b>Esc</b> to close</td><td><kbd>Esc</kbd>で閉じる</td></tr>
+    <tr><td><b>Arrows</b> to move between main window elements</td><td>矢印キーで項目を移動する</td></tr>
+    <tr><td>Gamepad support</td><td>ゲームパッドにも対応している</td></tr>
+    <tr><td><b>Bumpers</b> to move between tabs</td><td>LB/RBでタブを切り替える</td></tr>
+    <tr><td><b>Left Joystick</b> or <b>D-Pad</b> to move between main</td><td>左スティックか十字キーで項目を移動する</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:28px">管理用の入力フォーム（社長だけが使う画面）</h3>
+<p class="section-note">
+  ストアの商品や状態効果を<b>自分で新しく作る</b>ときの画面。普段は触らなくていい。
+</p>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th>画面に出る英語</th><th>意味</th></tr></thead>
+  <tbody>
+    <tr><td>Create new store item</td><td>ストアの商品を新しく作る</td></tr>
+    <tr><td>Create new status effect</td><td>状態効果を新しく作る</td></tr>
+    <tr><td>Name of icon, can be items, pieces or almanac icons</td><td>アイコンの名前。アイテム名・建築物名・アルマナックのアイコン名が使える</td></tr>
+    <tr><td>Length of effect, in seconds</td><td>効果が続く長さ（秒）</td></tr>
+    <tr><td>Modifiers — Format: [Modifier,Float] : ...</td><td>補正の中身。「補正の名前,数値」の形で書く（例：StaminaRegenModifier,1.1＝スタミナ回復1.1倍）</td></tr>
+    <tr><td>Start Message / Stop Message</td><td>効果が始まったとき／切れたときに出す文言</td></tr>
+    <tr><td>Optional</td><td>省略してよい</td></tr>
+    <tr><td>Optional, Items received when purchasing</td><td>省略可。購入したときに渡すアイテム</td></tr>
+    <tr><td>Optional, if empty, name will be generated</td><td>省略可。空にすると名前が自動で作られる</td></tr>
+    <tr><td>Optional, unless creating a kill or pickable achievement</td><td>省略可。ただし「特定の敵を倒す」「特定の物を採る」実績を作るときは必須</td></tr>
+    <tr><td>Sell your item / Set size of stack / Almanac token price</td><td>アイテムを売る／まとめて売る個数を決める／トークンでの値段</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout" style="margin-top:16px">
+  <b>なぜ日本語にできないのか。</b> このMODは、画面のこれらの文言を
+  <b>プログラム本体（DLL）の中に文字として直接埋め込んでいる</b>。
+  翻訳ファイルで差し替えられるのは、MODが「翻訳の受け口」を用意している項目だけで、
+  ここにはそれが無い（445項目すべてを調べて確認した）。
+  <b>アイテム名・タブ・実績・宝箱・賞金首・ストアの商品名は、すべて日本語化してある。</b>
+  残っているのはこの表の分だけ。
+</div>
+
+<!-- ══════════ 注意 ══════════ -->
+<h2 id="notes"><span class="n">Notes</span>知っておいてほしいこと</h2>
+
+<div class="mods">
+  <article class="mod" style="border-left-color:var(--crit)">
+    <div class="head"><h3>全員が同じMODでないと入れない</h3></div>
+    <div class="body">
+      <ul>
+        <li>MODを1つでも足したり消したりすると、<b>他の人は「バージョンが異なります」で弾かれる</b>。だから追加は<b>サーバー・ホスト・参加者を同時に更新</b>する必要がある</li>
+        <li>3者が揃っているかは毎回スクリプトで機械的に照合している。今は<b>28個すべて一致</b></li>
+        <li>配布するのは <span class="num">Valheim_MOD一式.zip</span>（<b>1,629MB</b>・日本語訳と説明書を同梱）。Discordは25MB上限なので<b>ギガファイル便</b>で渡す</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="mod" style="border-left-color:var(--warn)">
+    <div class="head"><h3>MODを入れた「あと」から始めたワールドではない</h3></div>
+    <div class="body">
+      <ul>
+        <li>今のワールドは既に広く探索されている。<b>新しい素材と場所は「まだ行っていない土地」にしか湧かない</b></li>
+        <li>該当するもの：Monstrumのミニボス祭壇、FineWoodPiecesの<b>葦・粘土・粘土採掘場</b>、Fire&amp;Iceの極北の植生</li>
+        <li>つまり<b>遠出すると新要素に当たる</b>。逆に拠点周りだけ回っていても何も変わらない</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="mod" style="border-left-color:var(--warn)">
+    <div class="head"><h3>スタック上限を後から下げると物が消えることがある</h3></div>
+    <div class="body">
+      <ul>
+        <li>今は4倍（木なら200個まで1スタック）。<b>これを後から2倍に戻すと、上限を超えている分が失われうる</b></li>
+        <li>下げたくなったときは<b>先に言ってほしい</b>。世界のバックアップを取ってからにする</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head"><h3>入れなかったMODと、その理由</h3></div>
+    <div class="body">
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>MOD</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td class="k">CreatureLevelAndLootControl</td><td><b>ValheimPlusと同居できない</b>と自ら宣言していて、BepInExがロードを拒否した（サーバーのログで確認）。代わりに CreatureManager を入れた</td></tr>
+          <tr><td class="k">Sailing</td><td>同上。船が速くなる部分は<b>ValheimPlusの設定で代替</b>（前進・後進とも+40%）。スキル制は諦めた</td></tr>
+          <tr><td class="k">Storage Utils</td><td>起動時に例外を投げて<b>そもそも動いていなかった</b>（今日ではなく前から）。機能はQuickStackStoreと重複していたので撤去のみ</td></tr>
+          <tr><td class="k">ServerCharacters</td><td>ValheimPlusと同居不可。ValheimPlusを優先した</td></tr>
+          <tr><td class="k">First Person View</td><td>現行Valheimで消えた関数を毎フレーム呼んで<b>画面が固まる</b>。一人称はValheimPlus内蔵（<kbd>F10</kbd>）で足りる</td></tr>
+          <tr><td class="k">Smoothbrain Mining（採掘スキル）</td><td><b>ValheimPlusと同居不可</b>。DL62万の人気MODだがロード拒否される</td></tr>
+          <tr><td class="k">TopMining（採掘が楽になる）</td><td>一度入れたが<b>撤去した</b>。欲しかったのは「掘る道具の種類を増やす」ことで、これは「掘る手間を省く」MODだった。代わりに <b>Groundwork</b> と <b>MoreTerrainTypes</b> を入れた</td></tr>
+          <tr><td class="k">SpeedyPaths</td><td>好みに合わないため不採用</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </article>
+
+  <article class="mod">
+    <div class="head"><h3>まだ入れていない候補</h3></div>
+    <div class="body">
+      <p>調査済みで、欲しければすぐ入れられるもの。</p>
+      <ul>
+        <li><b>Multi User Chest</b>：複数人が同じ箱を<b>同時に開ける</b>ようにする。
+            今は安全のため、他人が開いている箱には「まとめて収納」できない制限がある</li>
+        <li><b>GradualTerrain</b>：採掘で<b>土の壁や落とし穴ができるのを防ぐ</b>（ValheimPlus衝突なしを確認済み）</li>
+        <li><b>ImpactfulSkills</b>：スキルが上がるほど採取量・与ダメが増え、<b>上げる意味が強くなる</b>（ValheimPlus衝突なしを確認済み。ただし公開が新しく実績は薄い）</li>
+      </ul>
+      <div class="callout">
+        <b>MODを足すと全員が入れ直しになる。</b> 一度にまとめてやる方が手間が少ないので、
+        欲しいものが溜まったタイミングで一気に入れたい。
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer>
+  作成 2026-07-28 ／ 全ての設定値はサーバーの設定ファイルと起動ログから直接読み取った実測値。
+  MODの機能説明は各MODの公式ドキュメントに基づく。
+</footer>
+
+
+<button id="totop" type="button">↑ 先頭へ</button>
+
+<script>
+(function () {
+  "use strict";
+
+  /* MODの絞り込み。カードを隠し、中身が空になった見出しも一緒に隠す */
+  var q = document.getElementById("q");
+  var qn = document.getElementById("qn");
+  var cards = [].slice.call(document.querySelectorAll(".mod"));
+  cards.forEach(function (c) { c.dataset.t = (c.textContent || "").toLowerCase(); });
+
+  function filter() {
+    var v = q.value.trim().toLowerCase();
+    var hit = 0;
+    cards.forEach(function (c) {
+      var show = !v || c.dataset.t.indexOf(v) >= 0;
+      c.hidden = !show;
+      if (show) { hit++; }
+    });
+    /* 全部隠れたMOD群は、その見出しと説明文も隠す */
+    [].forEach.call(document.querySelectorAll(".mods"), function (g) {
+      var any = [].some.call(g.querySelectorAll(".mod"), function (c) { return !c.hidden; });
+      var prev = g.previousElementSibling;
+      while (prev && (prev.classList.contains("section-note") || prev.tagName === "H2")) {
+        prev.hidden = !any;
+        if (prev.tagName === "H2") { break; }
+        prev = prev.previousElementSibling;
+      }
+    });
+    qn.textContent = v ? hit + " 件" : "";
+  }
+  q.addEventListener("input", filter);
+
+  /* いま見ている節を目次バーで光らせる */
+  var links = [].slice.call(document.querySelectorAll(".subnav a"));
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  var top = document.getElementById("totop");
+
+  function onScroll() {
+    var y = window.scrollY + 90;
+    var cur = -1;
+    targets.forEach(function (el, i) { if (el && el.offsetTop <= y) { cur = i; } });
+    links.forEach(function (a, i) { a.classList.toggle("on", i === cur); });
+    top.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  top.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+})();
+</script>
+
+</div>
+
+</body>
+</html>
