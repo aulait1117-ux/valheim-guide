@@ -309,7 +309,7 @@
     <li><a href="#m-build">建築</a></li>
     <li><a href="#m-life">便利</a></li>
     <li><a href="#m-rank">実績・ランキング</a></li>
-    <li><a href="#rank-how">報酬の回り方</a></li>
+    <li><a href="#rank-how">報酬</a></li>
     <li><a href="#skills">スキル</a></li>
     <li><a href="#translate">対訳</a></li>
     <li><a href="#notes">注意</a></li>
@@ -317,10 +317,10 @@
 </nav>
 
 <header class="top">
-  <p class="eyebrow">Valheim 専用サーバー ／ 全33MOD 説明書</p>
+  <p class="eyebrow">Valheim 専用サーバー ／ 全32MOD 説明書</p>
   <h1>豚と踊るカエル</h1>
   <p class="lede">
-    このサーバーに入っているMOD33個の中身と使い方、そして「バニラと何が違うか」を全部書いた。
+    このサーバーに入っているMOD32個の中身と使い方、そして「バニラと何が違うか」を全部書いた。
     設定値はすべて 2026-07-28 時点でサーバーの設定ファイルから直接読み取った実際の値。
   </p>
   <dl class="conn">
@@ -348,7 +348,7 @@
   <a href="#keys"><b>キーが分からない</b><span>全MODのキー割り当て一覧</span></a>
   <a href="#settings"><b>普通のヴァルヘイムと何が違う？</b><span>変更した設定を全部</span></a>
   <a href="#m-rank"><b>実績・ランキングを見たい</b><span>アルマナックの使い方</span></a>
-  <a href="#rank-how"><b>報酬のもらい方が分からない</b><span>どこを押せば受け取れるか</span></a>
+  <a href="#rank-how"><b>報酬はどこでもらえる？</b><span>トークンの稼ぎ方と使い道</span></a>
   <a href="#skills"><b>スキルを早く上げたい</b><span>装備と薬で伸ばす</span></a>
   <a href="#m-move"><b>飛びたい・乗りたい</b><span>騎乗と飛行のMOD</span></a>
   <a href="#notes"><b>入れなかったMODは？</b><span>理由つきで全部書いた</span></a>
@@ -371,7 +371,7 @@
     <li><a href="#m-build"><span class="num">05</span>建築・内装・地形</a></li>
     <li><a href="#m-life"><span class="num">06</span>生活の便利さ</a></li>
     <li><a href="#m-rank"><span class="num">07</span>実績・ランキング・毎日の報酬</a></li>
-    <li><a href="#rank-how"><span class="num">08</span>報酬の回り方</a></li>
+    <li><a href="#rank-how"><span class="num">08</span>報酬について</a></li>
     <li><a href="#skills"><span class="num">09</span>スキルを早く上げる</a></li>
     <li><a href="#m-core"><span class="num">10</span>土台MOD</a></li>
     <li><a href="#translate"><span class="num">11</span>英語画面の対訳</a></li>
@@ -393,15 +393,15 @@
     <tr><td class="k"><kbd>L</kbd></td><td>矢・食料などを近くの箱から<b>補充</b></td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>O</kbd></td><td>持ち物／箱の<b>並べ替え</b></td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>Delete</kbd></td><td>今つかんでいる物を<b>1つ捨てる</b></td><td>QuickStackStore</td></tr>
-    <tr><td class="k"><kbd>テンキー3</kbd></td><td>「捨てる」印を付けた物を<b>まとめて捨てる</b><span style="color:var(--ember)">※新しく割り当てた</span></td><td>QuickStackStore</td></tr>
-    <tr><td class="k"><kbd>テンキー4</kbd></td><td>MagicalMounts のパネルを開く<span style="color:var(--ember)">※F9から変更</span></td><td>MagicalMounts</td></tr>
-    <tr><td class="k"><kbd>テンキー5</kbd></td><td>乗っている生き物を休ませる<span style="color:var(--ember)">※Pから変更</span></td><td>MagicalMounts</td></tr>
-    <tr><td class="k"><kbd>テンキー6</kbd></td><td>乗り物に<b>ついて来させる</b><span style="color:var(--ember)">※Mから変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>]</kbd></td><td>「捨てる」印を付けた物を<b>まとめて捨てる</b><span style="color:var(--ember)">※新しく割り当てた</span></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>;</kbd></td><td>MagicalMounts のパネルを開く<span style="color:var(--ember)">※F9から変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>-</kbd></td><td>乗っている生き物を休ませる<span style="color:var(--ember)">※Pから変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>/</kbd></td><td>乗り物に<b>ついて来させる</b><span style="color:var(--ember)">※Mから変更</span></td><td>MagicalMounts</td></tr>
     <tr><td class="k"><kbd>F10</kbd></td><td>乗り物を<b>呼び出す</b></td><td>MagicalMounts</td></tr>
     <tr><td class="k"><kbd>F</kbd></td><td>乗り物に<b>餌をやる</b></td><td>MagicalMounts</td></tr>
     <tr><td class="k"><kbd>右Shift</kbd> / <kbd>右Ctrl</kbd></td><td>飛び立つ／着地する</td><td>MagicalMounts</td></tr>
     <tr><td class="k"><kbd>Space</kbd> / <kbd>左Ctrl</kbd></td><td>（飛行中）上昇／下降</td><td>MagicalMounts</td></tr>
-    <tr><td class="k"><kbd>テンキー2</kbd></td><td>アルマナックの<b>クエスト画面</b></td><td>Almanac</td></tr>
+    <tr><td class="k"><kbd>[</kbd></td><td>アルマナックの<b>クエスト画面</b></td><td>Almanac</td></tr>
     <tr><td class="k"><kbd>Alt</kbd>＋クリック</td><td><b>お気に入り登録</b>。登録した物は収納・並べ替え・破棄の対象外になる（右クリックで枠ごと固定）</td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd></td><td>エピックルートの<b>アビリティ発動</b></td><td>Epic Loot</td></tr>
     <tr><td class="k"><kbd>V</kbd></td><td><b>一人称視点</b>の切り替え <span style="color:var(--ember)">※2026-07-28に F10 から変更</span></td><td>ValheimPlus</td></tr>
@@ -418,7 +418,7 @@
     <tr><td class="k"><kbd>F</kbd> / <kbd>G</kbd>（建築中）</td><td>狙った物の角度を<b>平行／垂直にコピー</b></td><td>ValheimPlus</td></tr>
     <tr><td class="k"><kbd>F4</kbd></td><td>グリッド吸着の<b>オン／オフ</b><span style="color:var(--ember)">※F7から変更</span></td><td>ValheimPlus</td></tr>
     <tr><td class="k"><kbd>F6</kbd></td><td>既定の吸着方式を変える</td><td>ValheimPlus</td></tr>
-    <tr><td class="k"><kbd>Num0</kbd></td><td><b>高度編集モード</b>（置いた物を後から動かす）。<kbd>NumEnter</kbd>で確定、<kbd>F7</kbd>でリセット、<kbd>F8</kbd>で中止</td><td>ValheimPlus</td></tr>
+    <tr><td class="k"><kbd>Insert</kbd></td><td><b>高度編集モード</b>（置いた物を後から動かす）。<kbd>End</kbd>で確定、<kbd>F7</kbd>でリセット、<kbd>F8</kbd>で中止</td><td>ValheimPlus</td></tr>
     <tr><td class="k"><kbd>F5</kbd></td><td>コンソール（バニラ機能）</td><td>—</td></tr>
   </tbody>
 </table>
@@ -428,8 +428,9 @@
   <b>キーを自分で変えるときは必ず読むこと。</b>
   MODが33個入っているので、<b>押しやすいキーはほぼ埋まっている</b>。適当に変えると、
   「押したら2つ同時に発動する」「別のMODが反応しなくなる」という状態になり、原因が分かりにくい。<br><br>
-  <b>今きれいに空いているのは <kbd>テンキー9</kbd> くらいしかない。</b>
-  テンキー1〜6はすべて埋まった（1=並べ植え／2=クエスト／3=まとめ捨て／4=乗り物パネル／5=休ませる／6=ついて来い）。
+  <b>テンキーは1つも使っていない。</b>ノートPCなどテンキーが無いキーボードでも、
+  すべての機能が使えるように <kbd>[</kbd> <kbd>]</kbd> <kbd>;</kbd> <kbd>-</kbd> <kbd>/</kbd> <kbd>\</kbd>
+  といったEnter周りの記号キーへ移してある（2026-07-29）。
   それ以外はValheim本体かMODのどれかが使っている（本体側は 設定 → 操作 で確認できる）。<br><br>
   変えたいときは<b>言ってもらえれば、全MODとValheim本体の割り当てを機械的に突き合わせて、
   衝突しないキーを選んで設定する</b>。自分で変えて挙動がおかしくなった場合も、同じ方法で原因を特定できる。
@@ -1263,7 +1264,7 @@
         <span class="lbl">見落としがちな便利機能</span>
         <ul>
           <li><b>高度建築モード</b>（<kbd>F2</kbd>）：置く前の物をミリ単位で動かす・回す</li>
-          <li><b>高度編集モード</b>（<kbd>Num0</kbd>）：<b>もう置いてある物</b>を後から動かす。建て直し不要</li>
+          <li><b>高度編集モード</b>（<kbd>Insert</kbd>）：<b>もう置いてある物</b>を後から動かす。建て直し不要</li>
           <li><b>自由回転</b>（建築中に <kbd>Alt</kbd> <kbd>C</kbd> <kbd>Z</kbd>）：斜めの梁や傾けた装飾が置ける</li>
           <li><b>角度のコピー</b>（<kbd>F</kbd> <kbd>G</kbd>）：狙った物と同じ角度で置く</li>
           <li><b>範囲修理</b>：ハンマーで1回叩けば半径7.5m全部が直る</li>
@@ -1307,7 +1308,7 @@
           <li><b>補充</b>（<kbd>L</kbd>）：矢・食料などを近くの箱から満タンまで戻す。出かける前に押す</li>
           <li><b>並べ替え</b>（<kbd>O</kbd>）：名前・価値・重さ・種類から選べる</li>
           <li><b>捨てる</b>（<kbd>Delete</kbd>）：<b>今つかんでいる物を1つ</b>捨てる</li>
-          <li><b>まとめて捨てる</b>（<kbd>テンキー3</kbd>）：「捨てる」印を付けた物を<b>一度に全部</b>捨てる</li>
+          <li><b>まとめて捨てる</b>（<kbd>]</kbd>）：「捨てる」印を付けた物を<b>一度に全部</b>捨てる</li>
         </ul>
       </div>
       <div class="block">
@@ -1321,7 +1322,7 @@
         <span class="lbl">「捨てる」印の付け方</span>
         <ul>
           <li>持ち物を開くと<b>ゴミ箱</b>が出る。<b>アイテムを掴んでゴミ箱の上に重ね、<kbd>左Alt</kbd>を押しながら左クリック</b>すると「捨てる」印が付く（赤い枠が出る）</li>
-          <li>印を付けたものを<b>まとめて捨てる</b>のは <kbd>テンキー3</kbd>。<b>何も持っていない状態でゴミ箱をクリックしても同じ</b></li>
+          <li>印を付けたものを<b>まとめて捨てる</b>のは <kbd>]</kbd>。<b>何も持っていない状態でゴミ箱をクリックしても同じ</b></li>
           <li><kbd>Delete</kbd> は<b>今つかんでいる物を1つ捨てる</b>キー。まとめ捨てではない</li>
           <li>設定でトロフィーを常に「捨てる」扱いにすることもできる</li>
         </ul>
@@ -1674,7 +1675,7 @@
         <span class="lbl">⑥ 図鑑としても使える</span>
         <ul>
           <li>全アイテム・全建築物・全生物のデータが載る。<b>生物の耐性と弱点</b>、<b>何を落とすか</b>も分かる</li>
-          <li>クエスト画面は <kbd>テンキー2</kbd>（ServerRewardsのショップが <kbd>F9</kbd> を使うため移した）</li>
+          <li>クエスト画面は <kbd>[</kbd></li>
         </ul>
       </div>
 
@@ -1684,177 +1685,58 @@
       <div class="callout good">
         <b>順位はサーバーに残る。</b> 各自がログインしたときとセーブしたときに、成績がサーバーの
         <span class="num">KigyodoWorld.Leaderboard.dat</span> へ書き込まれる。
-        これを使って<b>毎日の報酬を順位で自動的に切り替えている</b>（→ <a href="#rank-how">報酬の回り方</a>）。<br>
+        順位はここに貯まるので、ログアウトしても消えない。<br>
         なお、時間が来たら画面に順位を発表する機能はMOD側に無い。順位はいつでもランキングのタブで見られる。
       </div>
     </div>
   </article>
 
-  <article class="mod is-new">
-    <div class="head">
-      <h3>ServerRewards（毎日もらえる報酬）</h3><span class="ver">Forteca / v420.2.3</span>
-      <span class="tag new">今回追加</span>
-    </div>
-    <div class="body">
-      <p class="what">
-        <b>24時間ごとに1回、報酬を受け取れる。</b> 受け取るたびに翌日の中身が変わり、
-        <b>28日分</b>が一巡する。毎日ログインする理由になる。
-      </p>
-      <div class="block">
-        <span class="lbl">このサーバーで用意した28日分（通常）</span>
-        <ul>
-          <li><b>1〜6日目</b>：木材50／石50／樹脂20／火打石20／羽根15／革の切れ端20</li>
-          <li><b>7日目（節目）</b>：<b>コイン200</b></li>
-          <li><b>8〜13日目</b>：上質な木材40／石炭30／ニンジン10／蜂蜜20／鉄の釘30／鹿の皮20</li>
-          <li><b>14日目（節目）</b>：<b>ルビー3</b></li>
-          <li><b>15〜20日目</b>：銅鉱石30／錫鉱石30／鉄15／鎖2／トロールの皮10／黒曜石20</li>
-          <li><b>21日目（節目）</b>：<b>銀の首飾り2</b></li>
-          <li><b>22〜27日目</b>：銀20／黒金属20／水晶10／ユグドラシルの木20／鱗の皮15／タール25</li>
-          <li><b>28日目（節目）</b>：<b>青の宝石1</b></li>
-        </ul>
-      </div>
-      <div class="block">
-        <span class="lbl">上位の報酬表も用意してある（4段階）</span>
-        <ul>
-          <li><b>通常</b>…上の表</li>
-          <li><b>PREMIUM</b>…通常の約3倍の量</li>
-          <li><b>EPIC</b>…序盤からコイン・鉄・銀・黒金属・エイトル・炎金属・宝石が並ぶ</li>
-          <li><b>LEGENDARY</b>…<b>極北の金属（ティラニウム／ラグノライト／ソラダス）や魔法のルーン</b>、
-              最終日は<b>コイン10,000</b></li>
-          <li>誰がどの段階になるかは<b>毎朝5時のランキング集計で自動的に決まる</b>（→ <a href="#rank-how">報酬の回り方</a>）</li>
-        </ul>
-      </div>
-      <div class="callout good">
-        報酬に書いたアイテム名は<b>全部、実在を機械照合してから</b>入れてある。
-        「受け取ったのに何も入っていない」は起きない。
-      </div>
-      <div class="block">
-        <span class="lbl">ランキング上位の人に、良い報酬が渡る（自動）</span>
-        <ul>
-          <li>誰がどの段階になるかは<b>名簿で決まる</b>。名簿に載っていない人は「通常」</li>
-          <li><b>毎日 朝5時に、サーバーが自分でランキングを集計して名簿を書き換える。</b>
-              1位が LEGENDARY、2位が EPIC、3位が PREMIUM になる</li>
-          <li>誰かのPCが起動している必要は無い。<b>サーバーの中で完結している</b></li>
-          <li>くわしくは <a href="#rank-how">報酬の回り方</a></li>
-        </ul>
-      </div>
-      <div class="callout bad">
-        <b>このMODの作者が、自分のSteamIDを名簿に最初から書き込んでいた。</b>
-        「このMODを入れた全サーバーで、自分は常に最上位の報酬をもらえる」という仕込み。
-        <b>導入時に削除済み</b>。今の名簿は空（＝全員が通常報酬）。
-      </div>
-      <div class="block">
-        <span class="lbl">使い方</span>
-        <ul>
-          <li><b>受け取りは <kbd>F9</kbd>。</b>ショップが開くので、そこで日替わり報酬を受け取る</li>
-          <li><b>24時間ごとに1回。</b>取り忘れても消えず、次に入ったときに受け取れる</li>
-          <li>遊んでいるだけで<b>1時間ごとに10トークン</b>が自動でたまる</li>
-        </ul>
-      </div>
-    </div>
-  </article>
 </div>
 
 
 
 <!-- ══════════ 報酬の回り方 ══════════ -->
-<h2 id="rank-how"><span class="n">System</span>報酬のもらい方と、順位で変わる仕組み</h2>
+<h2 id="rank-how"><span class="n">System</span>日替わり報酬は停止中</h2>
 <p class="section-note">
-  順位が上の人ほど、毎日の報酬が良くなる。<b>誰かが操作しなくても、サーバーが毎朝ひとりでに切り替える。</b>
+  ログインするたびに報酬がもらえる仕組み（ServerRewards）を入れていたが、
+  <b>2026-07-29 のセキュリティ監査で問題が見つかったため停止した。</b>
 </p>
 
-<div class="tbl-wrap" style="margin-top:8px">
-<table>
-  <thead><tr><th style="width:22%">順位</th><th style="width:26%">その日からの報酬</th><th>中身のちがい</th></tr></thead>
-  <tbody>
-    <tr><td class="k"><b>1位</b></td><td class="k"><b>LEGENDARY</b></td><td>極北の金属（ティラニウム／ラグノライト／ソラダス）、魔法のルーン、最終日は<b>コイン10,000</b></td></tr>
-    <tr><td class="k"><b>2位</b></td><td class="k"><b>EPIC</b></td><td>序盤からコイン・鉄・銀・黒金属・エイトル・炎金属・宝石が並ぶ</td></tr>
-    <tr><td class="k"><b>3位</b></td><td class="k"><b>PREMIUM</b></td><td>通常の約3倍の量</td></tr>
-    <tr><td class="k">4位以下</td><td class="k">通常</td><td>木材・石・樹脂などから始まる28日分</td></tr>
-  </tbody>
-</table>
+<div class="callout bad">
+  <b>止めた理由は3つ。</b>
+  <ul style="margin:8px 0 0; padding-left:1.2em">
+    <li><b>MODの作者が、自分のアカウント2つを最上位の権限としてプログラムに焼き込んでいた。</b>
+        設定ファイルから消しても無効にならない（作者自身が
+        「ここから消しても常に有効」と設定ファイルに書いている）</li>
+    <li><b>誰でも自分にトークンを増やせる通信の入口があった</b>（別途の独立監査による指摘。
+        該当する処理名はこちらでも確認した）</li>
+    <li><b>ショップのデータが空のまま送られ、受け取った側でエラーになっていた。</b>
+        買い物の応答が壊れており、実際に例外が記録されていた</li>
+  </ul>
 </div>
 
-
-<h3 style="margin-top:30px">もらい方（どこを押すのか）</h3>
-<div class="tbl-wrap" style="margin-top:8px">
-<table>
-  <thead><tr><th style="width:26%">もらえるもの</th><th style="width:34%">やること</th><th>自動か</th></tr></thead>
-  <tbody>
-    <tr>
-      <td class="k"><b>アルマナックトークン</b></td>
-      <td>遊んでいるだけ</td>
-      <td><b>自動。1時間ごとに10枚</b>たまる</td>
-    </tr>
-    <tr>
-      <td class="k"><b>日替わり報酬</b></td>
-      <td><kbd>F9</kbd> でショップを開いて受け取る</td>
-      <td>手動。<b>24時間ごとに1回</b>。ログインすると知らせが出る</td>
-    </tr>
-    <tr>
-      <td class="k"><b>実績のトークン</b></td>
-      <td>実績を達成する</td>
-      <td>自動。達成した時点でもらえる</td>
-    </tr>
-    <tr>
-      <td class="k"><b>宝探しの中身</b></td>
-      <td>アルマナックで地図を買う → 現地へ行く → <b>樽を開ける</b></td>
-      <td>手動（探しに行くのが遊びの部分）</td>
-    </tr>
-    <tr>
-      <td class="k"><b>賞金首の報酬</b></td>
-      <td>契約を買う → 出てきた敵を倒す</td>
-      <td>手動</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<div class="callout good" style="margin-top:14px">
-  <b>日替わり報酬は取り忘れても消えない。</b> 何日か空けても、次に入ったときにちゃんと受け取れる。
-  受け取った回数で進むので、<b>28日目まで飛ばされることはない</b>。
-</div>
-<div class="callout" style="margin-top:10px">
-  <b>たまったトークンの使い道</b>は4つ。
-  <b>宝探しの地図</b>を買う（5〜30枚）／<b>ストア</b>で確実に欲しい物やバフと交換する／
-  <b>宝くじ</b>を回す（1枚で3つ揃えば10枚）／<b>コインに両替</b>する（1枚＝50コイン）。
-</div>
-
-
-<div class="howto">
-  <h4>日替わり報酬の受け取り方</h4>
-  <ol class="steps">
-    <li><b><kbd>F9</kbd> を押す</b>
-        <span class="sub">ショップの画面が開く。持ち物を開いている必要はない</span></li>
-    <li><b>「受け取る」を押す</b>
-        <span class="sub">24時間経っていれば押せる。まだなら残り時間が出る</span></li>
-    <li><b>持ち物に入る</b>
-        <span class="sub">持ち物がいっぱいだと入らないので、空けてから受け取る</span></li>
-  </ol>
-  <div class="callout good" style="margin-top:14px">
-    <b>取り忘れても消えない。</b>3日空けても、次に入ったときに続きから受け取れる。
-    受け取った<b>回数</b>で進むので、日数が飛ぶことはない。
-  </div>
-</div>
-
-<h3 style="margin-top:30px">順位の決まり方</h3>
-<p class="section-note" style="margin-bottom:10px">
-  アルマナックが使っているのと<b>同じ式</b>で計算している。
-</p>
 <div class="callout good">
-  <b>順位点 ＝ 達成した実績の数 ＋（倒した数 ÷ 死んだ数）</b><br>
-  実績を積んでも上がるし、死なずに戦っても上がる。<b>死ぬと下がる</b>ので、無茶をしすぎると順位を落とす。
+  <b>消してはいない。</b> プログラムは<span class="num">BepInEx/disabled_plugins/</span>へ移してあり、
+  貯まっていたトークンや受け取り履歴もそのまま残してある。安全な代わりが見つかれば戻せる。
 </div>
 
-<h3 style="margin-top:30px">いつ・どうやって切り替わるか</h3>
-<ol class="steps">
-  <li><b>遊ぶ。</b>ログインしたときとセーブしたときに、自分の成績がサーバーへ送られる</li>
-  <li><b>毎日 朝5時（日本時間）</b>、サーバーが全員の成績を読んで順位を出す</li>
-  <li><b>1位・2位・3位の名簿が自動で書き換わる。</b>その人の日替わり報酬が翌日から良くなる</li>
-  <li>誰のPCも起動している必要は無い。<b>サーバーの中だけで完結している</b></li>
-</ol>
+<h3 style="margin-top:30px">今もらえるもの</h3>
+<div class="tbl-wrap" style="margin-top:8px">
+<table>
+  <thead><tr><th style="width:28%">もらえるもの</th><th style="width:32%">やること</th><th>備考</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>アルマナックトークン</b></td><td>実績を達成する</td><td>実績64個。達成すると自動でもらえる</td></tr>
+    <tr><td class="k"><b>宝探しの中身</b></td><td>地図を買う → 現地の樽を開ける</td><td>16種類。<b>黄金の宝箱</b>ではレア装備の素が出る</td></tr>
+    <tr><td class="k"><b>賞金首の報酬</b></td><td>契約を買う → 強化された敵を倒す</td><td>繰り返し稼げる</td></tr>
+    <tr><td class="k"><b>宝くじ</b></td><td>トークン1枚で回す</td><td>3つ揃えば10枚</td></tr>
+    <tr><td class="k"><b>ストア</b></td><td>トークンで交換</td><td>17品。<b>修練の霊薬</b>もここ</td></tr>
+  </tbody>
+</table>
+</div>
 <div class="callout">
-  <b>報酬は24時間に1回、自分で受け取りに行く。</b>受け取るたびに翌日の中身が変わり、28日で一巡する。
-  順位が変わっても<b>進んだ日数はそのまま</b>で、その日以降の中身の等級だけが変わる。
+  <b>「1時間ごとに10トークン」と「ログイン報酬」は無くなった。</b>
+  トークンは<b>実績・賞金首・宝くじ</b>で稼ぐ形になる。
+  ランキングは<b>アルマナックで今まで通り見られる</b>（順位に応じて報酬が変わる仕組みだけが止まっている）。
 </div>
 
 <!-- ══════════ スキル ══════════ -->
