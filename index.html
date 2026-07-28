@@ -392,7 +392,16 @@
     <tr><td class="k"><kbd>P</kbd></td><td>手持ちを近くの箱へ<b>まとめて収納</b>（同じ物が入っている箱にだけ入る）</td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>L</kbd></td><td>矢・食料などを近くの箱から<b>補充</b></td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>O</kbd></td><td>持ち物／箱の<b>並べ替え</b></td><td>QuickStackStore</td></tr>
-    <tr><td class="k"><kbd>Delete</kbd></td><td>持っている物を<b>捨てる</b></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>Delete</kbd></td><td>今つかんでいる物を<b>1つ捨てる</b></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>テンキー3</kbd></td><td>「捨てる」印を付けた物を<b>まとめて捨てる</b><span style="color:var(--ember)">※新しく割り当てた</span></td><td>QuickStackStore</td></tr>
+    <tr><td class="k"><kbd>テンキー4</kbd></td><td>MagicalMounts のパネルを開く<span style="color:var(--ember)">※F9から変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>テンキー5</kbd></td><td>乗っている生き物を休ませる<span style="color:var(--ember)">※Pから変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>テンキー6</kbd></td><td>乗り物に<b>ついて来させる</b><span style="color:var(--ember)">※Mから変更</span></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>F10</kbd></td><td>乗り物を<b>呼び出す</b></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>F</kbd></td><td>乗り物に<b>餌をやる</b></td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>右Shift</kbd> / <kbd>右Ctrl</kbd></td><td>飛び立つ／着地する</td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>Space</kbd> / <kbd>左Ctrl</kbd></td><td>（飛行中）上昇／下降</td><td>MagicalMounts</td></tr>
+    <tr><td class="k"><kbd>テンキー2</kbd></td><td>アルマナックの<b>クエスト画面</b></td><td>Almanac</td></tr>
     <tr><td class="k"><kbd>Alt</kbd>＋クリック</td><td><b>お気に入り登録</b>。登録した物は収納・並べ替え・破棄の対象外になる（右クリックで枠ごと固定）</td><td>QuickStackStore</td></tr>
     <tr><td class="k"><kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd></td><td>エピックルートの<b>アビリティ発動</b></td><td>Epic Loot</td></tr>
     <tr><td class="k"><kbd>V</kbd></td><td><b>一人称視点</b>の切り替え <span style="color:var(--ember)">※2026-07-28に F10 から変更</span></td><td>ValheimPlus</td></tr>
@@ -419,7 +428,8 @@
   <b>キーを自分で変えるときは必ず読むこと。</b>
   MODが33個入っているので、<b>押しやすいキーはほぼ埋まっている</b>。適当に変えると、
   「押したら2つ同時に発動する」「別のMODが反応しなくなる」という状態になり、原因が分かりにくい。<br><br>
-  <b>今きれいに空いているのは、テンキーの2〜6・9くらいしかない。</b>（<kbd>I</kbd> <kbd>M</kbd> <kbd>U</kbd> <kbd>F9</kbd> <kbd>F11</kbd> <kbd>F12</kbd> は新しいMODで埋まった）
+  <b>今きれいに空いているのは <kbd>テンキー9</kbd> くらいしかない。</b>
+  テンキー1〜6はすべて埋まった（1=並べ植え／2=クエスト／3=まとめ捨て／4=乗り物パネル／5=休ませる／6=ついて来い）。
   それ以外はValheim本体かMODのどれかが使っている（本体側は 設定 → 操作 で確認できる）。<br><br>
   変えたいときは<b>言ってもらえれば、全MODとValheim本体の割り当てを機械的に突き合わせて、
   衝突しないキーを選んで設定する</b>。自分で変えて挙動がおかしくなった場合も、同じ方法で原因を特定できる。
@@ -440,6 +450,15 @@
 <p class="section-note">
   ValheimPlus の設定はサーバーから全員へ自動で配られる。手元でいじっても上書きされるので、変えたいときは言ってほしい。
 </p>
+<div class="callout bad" style="margin-top:14px">
+  <b>Valheim本体のキーは、ゲームを終了するときに書き戻される。</b>
+  本体側のキー（自動拾いなど）を変えるときは、<b>必ずゲームを閉じてから</b>変える。
+  遊んでいる最中に変えても、終了時に元へ戻る。<br>
+  2026-07-29、<b>一人称の <kbd>V</kbd> と本体の「自動拾い」が二重になっていた</b>のはこれが原因。
+  一度 <kbd>N</kbd> へ移したはずが、その後のプレイで書き戻っていた。
+  <b>今は自動拾い＝<kbd>N</kbd>。</b>もしまた二重になったら同じことが起きている。
+</div>
+
 
 <h3 style="margin-top:22px">世界そのものの難易度</h3>
 <div class="tbl-wrap" style="margin-top:8px">
@@ -1287,7 +1306,8 @@
           <li><b>まとめて収納</b>（<kbd>P</kbd>）：<b>その物が既に入っている箱にだけ</b>入る。だから拠点で押せば勝手に片付く</li>
           <li><b>補充</b>（<kbd>L</kbd>）：矢・食料などを近くの箱から満タンまで戻す。出かける前に押す</li>
           <li><b>並べ替え</b>（<kbd>O</kbd>）：名前・価値・重さ・種類から選べる</li>
-          <li><b>捨てる</b>（<kbd>Delete</kbd>）：持っている物を捨てる。「捨てる」印を付けた物をまとめて捨てることもできる</li>
+          <li><b>捨てる</b>（<kbd>Delete</kbd>）：<b>今つかんでいる物を1つ</b>捨てる</li>
+          <li><b>まとめて捨てる</b>（<kbd>テンキー3</kbd>）：「捨てる」印を付けた物を<b>一度に全部</b>捨てる</li>
         </ul>
       </div>
       <div class="block">
@@ -1300,8 +1320,9 @@
       <div class="block">
         <span class="lbl">「捨てる」印の付け方</span>
         <ul>
-          <li>持ち物を開くと<b>ゴミ箱</b>が出る。<b>捨てたいアイテムをゴミ箱の上に重ねた状態で <kbd>Alt</kbd>＋左クリック</b>すると「捨てる」印が付く</li>
-          <li>印を付けておくと、<kbd>Delete</kbd> で<b>印の付いたものだけをまとめて捨てられる</b>（毎回選ばなくていい）</li>
+          <li>持ち物を開くと<b>ゴミ箱</b>が出る。<b>アイテムを掴んでゴミ箱の上に重ね、<kbd>左Alt</kbd>を押しながら左クリック</b>すると「捨てる」印が付く（赤い枠が出る）</li>
+          <li>印を付けたものを<b>まとめて捨てる</b>のは <kbd>テンキー3</kbd>。<b>何も持っていない状態でゴミ箱をクリックしても同じ</b></li>
+          <li><kbd>Delete</kbd> は<b>今つかんでいる物を1つ捨てる</b>キー。まとめ捨てではない</li>
           <li>設定でトロフィーを常に「捨てる」扱いにすることもできる</li>
         </ul>
       </div>
@@ -1653,7 +1674,7 @@
         <span class="lbl">⑥ 図鑑としても使える</span>
         <ul>
           <li>全アイテム・全建築物・全生物のデータが載る。<b>生物の耐性と弱点</b>、<b>何を落とすか</b>も分かる</li>
-          <li>クエスト画面は <kbd>F9</kbd></li>
+          <li>クエスト画面は <kbd>テンキー2</kbd>（ServerRewardsのショップが <kbd>F9</kbd> を使うため移した）</li>
         </ul>
       </div>
 
