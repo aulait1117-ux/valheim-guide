@@ -488,7 +488,7 @@
 <ul>
   <li><b>手懐け方</b>：餌は全種共通で<b>コズミックトリート</b>（大釜で作る）。囲って餌を置き、離れて待つ。<b>およそ15分</b>。
       夜20時〜朝8時は寝ている</li>
-  <li><b>繁殖で強くできる。</b>子は★が上がることがあり（5%）、能力も±5%の幅で受け継ぐ。上限はない</li>
+  <li><b>繁殖で強くできる。</b>子は★が上がることがあり（5%・親のレベル±1）、能力も±5%の幅で受け継ぐ。<b>上限は★8</b>（2026-07-30に無制限から変更）。1レベル上げるのに出産40回前後が目安で、体格も1レベルごとに+10%膨らむ</li>
   <li><b>強さ</b>：狼が地上最強（体力1000・跳躍15）。鹿はスタミナ300で長距離に弱い。
       <b>飛べるのはレイヴンとドラゴンだけ</b>（ドラゴンは体力15,000）。走る速さは全種同じ</li>
   <li><b>コズミックセル</b>（鍛冶場：鉄3・鹿の皮5・亜麻の糸5）でテイムをしまって持ち運べる。
@@ -582,7 +582,7 @@
     <tr><td class="k">最大所持重量</td><td class="num">450</td><td>バニラ300。メギンギョルズは+150</td></tr>
     <tr><td class="k">自動拾い範囲</td><td class="num">2m</td><td>歩くだけで拾える</td></tr>
     <tr><td class="k">持ち物の段数</td><td class="num">6段</td><td>バニラ4段（＋2段）</td></tr>
-    <tr><td class="k"><b>資源の湧き直し</b></td><td class="num"><b>240〜300分</b></td><td>ベリー・キノコ・アザミ・タンポポ・枝・火打石など。一度1時間へ短縮していたが、<b>2026-07-30に既定値（4〜5時間）へ戻した</b></td></tr>
+    <tr><td class="k"><b>資源の湧き直し</b></td><td class="num"><b>120分</b></td><td>ベリー・キノコ・アザミ・タンポポ・枝・火打石など。<b>ゲーム内2日ちょうど</b>（この鯖は1日60分）。MOD既定は240〜300分だが、2026-07-30に社長判断で2日へ揃えた</td></tr>
   </tbody>
 </table>
 </div>
@@ -1892,6 +1892,22 @@
   <b>サーバートークン</b>という別の通貨もある（1時間で10枚・自動）。
   こちらは <kbd>F6</kbd> の画面の <b>Kit Packs</b> でだけ使える。宝くじや宝箱には使えない。
 </div>
+
+<h3 style="margin-top:30px">装備に付く効果の個数</h3>
+<p class="section-note" style="margin-bottom:10px">レアリティが効果の個数を決める。<b>2026-07-30に分布を分散させた</b>ので、上振れが出やすくなっている。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>レアリティ</th><th>基本</th><th>+1</th><th>+2</th><th>+3</th></tr></thead>
+  <tbody>
+    <tr><td class="k">マジック</td><td class="num">1個 50%</td><td class="num">2個 30%</td><td class="num">3個 15%</td><td class="num">4個 5%</td></tr>
+    <tr><td class="k">レア</td><td class="num">2個 50%</td><td class="num">3個 30%</td><td class="num">4個 15%</td><td class="num">5個 5%</td></tr>
+    <tr><td class="k">エピック</td><td class="num">3個 50%</td><td class="num">4個 30%</td><td class="num">5個 15%</td><td class="num">6個 5%</td></tr>
+    <tr><td class="k"><b>レジェンダリー</b></td><td class="num">4個 50%</td><td class="num">5個 30%</td><td class="num">6個 15%</td><td class="num"><b>7個 5%</b></td></tr>
+    <tr><td class="k"><b>ミシック</b></td><td class="num">5個 50%</td><td class="num">6個 30%</td><td class="num">7個 15%</td><td class="num"><b>8個 5%</b></td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout good">旧設定は「基本80%／+1が18%／+2が2%」だった。<b>+2以上の当たりが2%→20%へ10倍</b>になり、平均で0.5個ぶん効果が増える。</div>
 
 <h3 style="margin-top:30px">レジェンダリー装備はどれくらい落ちるか</h3>
 <p class="section-note" style="margin-bottom:10px">
