@@ -540,7 +540,7 @@
   <li><b>宝くじ</b>は1回トークン1枚。3つ揃いで10枚、全部揃い（1%）で<b>200枚</b></li>
   <li><b>余ったコインはトークンに替えられる</b>（<b>150コインで1枚</b>。2026-07-30にレートを見直した）</li>
   <li><b>実績は64件</b>あり、全部でトークン2,876枚ぶん。達成すると通知が出て、<b>永続のバフ</b>も付く（最大8個）</li>
-  <li><b>松明・焚き火は燃料無限。</b>ただし<b>温泉とシールド発生装置は燃料を消費する</b>（2026-07-30変更。灰の地で燃料を集める意味を残すため）。AutoFuelが箱や持ち物から自動で補充するので、手で入れる手間は要らない</li>
+  <li><b>松明・焚き火は燃料無限。</b>ただし<b>温泉とシールド発生装置は燃料を消費する</b>（2026-07-30変更。灰の地で燃料を集める意味を残すため）。ValheimPlusが近くの箱（50m以内）から自動で補充するので、手で入れる手間は要らない</li>
   <li><b>結界の範囲は40m</b>（敵の湧き阻止も同じ範囲）</li>
   <li><b>建築の強度は70%緩和</b>。高い塔や大きな張り出しが建つ（無茶な構造は崩れる）</li>
   <li><b>地図の位置公開は切れない。</b>お互いの居場所が常に見える</li>
@@ -1449,27 +1449,18 @@
 
   <article class="mod">
     <div class="head">
-      <h3>Auto Fuel</h3><span class="ver">aedenthorn / v1.2.0</span>
-      <span class="tag jp">翻訳対象なし</span>
+      <h3>Auto Fuel</h3><span class="ver">撤去（2026-07-30）</span>
+      <span class="tag jp">この鯖には入っていません</span>
     </div>
     <div class="body">
-      <p class="what">かまど・松明・製錬炉・炭焼き窯が、<b>近くの箱や地面から燃料と鉱石を勝手に吸い上げる</b>。</p>
-      <div class="block">
-        <span class="lbl">使い方（2通り）</span>
-        <ul>
-          <li>製錬炉の近くに箱を置いて、そこに<b>石炭・木・鉱石を入れておく</b>。勝手に補給される</li>
-          <li>あるいは<b>地面に落としておくだけ</b>でもいい</li>
-          <li>効く距離は既定で<b>5m</b>（かまど／製錬炉の鉱石／製錬炉の燃料でそれぞれ別に設定できる）</li>
-          <li><b>2026-07-30、ValheimPlus側の自動補充も有効にした。</b>焚き火・発酵樽に加えて<b>製錬所と炭焼き窯も、近くの箱から石炭と鉱石を自動で取り込み、出来上がりを箱へ戻す</b>ようになった（範囲<b>50m</b>）。サーバー側の設定なので、こちらは何もしなくても効く</li>
-        </ul>
-      </div>
-      <div class="callout good">松明にも効く。<b>拠点の松明が消える問題がなくなる</b>のが地味に大きい。</div>
-      <div class="block">
-        <span class="lbl">使い方</span>
-        <ul>
-          <li><b>やることは無い。</b>持ち物に燃料や鉱石があれば、<b>5m以内</b>のかまど・精錬所・炭焼き窯・たいまつへ自動で入る</li>
-          <li><b>丸太と上質な木材は入らない設定</b>にしてある（建材を燃やされないため）</li>
-          <li>立てたたいまつ・壁のたいまつ・焚き火にも自動で補給される</li>
+      <p class="what"><b>このMODは外しました。</b>ゲーム内コンソールが全コマンド無反応になる原因がこれだったためです（Terminalの入力処理に当てているパッチが例外で落ちていた）。</p>
+      <div class="callout good">
+        <b>機能は失っていません。ValheimPlusが肩代わりします。</b>
+        <ul style="margin:8px 0 0; padding-left:1.2em">
+          <li>焚き火・かまど・発酵樽・<b>製錬所・炭焼き窯</b>が、近くの箱から燃料と鉱石を自動で取り込みます</li>
+          <li>出来上がりは<b>自動で箱へ戻ります</b></li>
+          <li>範囲は<b>50m</b>。AutoFuelの5mより<b>10倍広い</b></li>
+          <li>サーバー側の設定なので、<b>各自の操作は要りません</b></li>
         </ul>
       </div>
     </div>
@@ -1895,22 +1886,20 @@
 </div>
 
 <h3 style="margin-top:30px">装備に付く効果の個数</h3>
-<p class="section-note" style="margin-bottom:10px"><b>レアリティに関係なく、この分布で決まる</b>（2026-07-30変更）。レアリティが決めるのは<b>1つあたりの効果の大きさ</b>で、個数はこの表のとおり。例：レジェンダリーでも効果1個のことがあり、マジックでも5個付くことがある。</p>
+<p class="section-note" style="margin-bottom:10px">レアリティごとに<b>個数の出方そのものが違う</b>（2026-07-30変更）。下限は無いので、<b>マジックでも稀に4個</b>付くし、<b>ミシックでも稀に1個</b>で終わる。あわせてレアリティは<b>1つあたりの効果の大きさ</b>も決める。</p>
 <div class="tbl-wrap">
 <table>
-  <thead><tr><th>効果の数</th><th>確率</th></tr></thead>
+  <thead><tr><th>レアリティ</th><th>1個</th><th>2個</th><th>3個</th><th>4個</th><th>5個</th><th>6個</th><th>7個</th><th>平均</th></tr></thead>
   <tbody>
-    <tr><td class="k"><b>1個</b></td><td class="num">30%</td></tr>
-    <tr><td class="k"><b>2個</b></td><td class="num">25%</td></tr>
-    <tr><td class="k"><b>3個</b></td><td class="num">20%</td></tr>
-    <tr><td class="k"><b>4個</b></td><td class="num">12%</td></tr>
-    <tr><td class="k"><b>5個</b></td><td class="num">7%</td></tr>
-    <tr><td class="k"><b>6個</b></td><td class="num">4%</td></tr>
-    <tr><td class="k"><b>7個</b></td><td class="num">2%</td></tr>
+    <tr><td class="k"><b>マジック</b></td><td class="num">55%</td><td class="num">30%</td><td class="num">12%</td><td class="num">3%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1.63</td></tr>
+    <tr><td class="k"><b>レア</b></td><td class="num">35%</td><td class="num">33%</td><td class="num">20%</td><td class="num">9%</td><td class="num">3%</td><td class="num">—</td><td class="num">—</td><td class="num">2.12</td></tr>
+    <tr><td class="k"><b>エピック</b></td><td class="num">18%</td><td class="num">28%</td><td class="num">28%</td><td class="num">17%</td><td class="num">7%</td><td class="num">2%</td><td class="num">—</td><td class="num">2.73</td></tr>
+    <tr><td class="k"><b>レジェンダリー</b></td><td class="num">8%</td><td class="num">18%</td><td class="num">27%</td><td class="num">25%</td><td class="num">14%</td><td class="num">6%</td><td class="num">2%</td><td class="num">3.45</td></tr>
+    <tr><td class="k"><b>ミシック</b></td><td class="num">3%</td><td class="num">10%</td><td class="num">20%</td><td class="num">27%</td><td class="num">22%</td><td class="num">12%</td><td class="num">6%</td><td class="num">4.15</td></tr>
   </tbody>
 </table>
 </div>
-<div class="callout good">1〜2個が55%、3〜4個が32%、<b>5個以上が13%</b>。最大は<b>7個（2%）</b>。レアリティが高いほど1つあたりが強いので、<b>「レジェンダリーの1個」と「マジックの3個」なら前者が強い</b>ことも多い。</div>
+<div class="callout good">マジックは平均1.6個、ミシックは平均4.2個。<b>高レアほど「多くて強い効果」が付きやすい</b>が、低レアの大当たりも残してある。</div>
 
 <h3 style="margin-top:30px">レジェンダリー装備はどれくらい落ちるか</h3>
 <p class="section-note" style="margin-bottom:10px">
