@@ -308,6 +308,7 @@
     <li><a href="#m-life">便利</a></li>
     <li><a href="#m-rank">実績・ランキング</a></li>
     <li><a href="#rank-how">報酬</a></li>
+    <li><a href="#enchant">エンチャント</a></li>
     <li><a href="#skills">スキル</a></li>
     <li><a href="#translate">対訳</a></li>
     <li><a href="#notes">注意</a></li>
@@ -378,10 +379,11 @@
     <li><a href="#m-life"><span class="num">06</span>生活の便利さ</a></li>
     <li><a href="#m-rank"><span class="num">07</span>実績・ランキング・毎日の報酬</a></li>
     <li><a href="#rank-how"><span class="num">08</span>報酬について</a></li>
-    <li><a href="#skills"><span class="num">09</span>スキルを早く上げる</a></li>
-    <li><a href="#m-core"><span class="num">10</span>土台MOD</a></li>
-    <li><a href="#translate"><span class="num">11</span>英語画面の対訳</a></li>
-    <li><a href="#notes"><span class="num">12</span>注意すること</a></li>
+    <li><a href="#enchant"><span class="num">09</span>エンチャントのやり方</a></li>
+    <li><a href="#skills"><span class="num">10</span>スキルを早く上げる</a></li>
+    <li><a href="#m-core"><span class="num">11</span>土台MOD</a></li>
+    <li><a href="#translate"><span class="num">12</span>英語画面の対訳</a></li>
+    <li><a href="#notes"><span class="num">13</span>注意すること</a></li>
   </ol>
 </nav>
 
@@ -474,10 +476,10 @@
 <table>
   <thead><tr><th>場所</th><th>出るもの</th><th>湧きやすさ</th></tr></thead>
   <tbody>
-    <tr><td class="k">草原</td><td>馬（白・黒・灰・茶・パロミノ）</td><td>各20</td></tr>
-    <tr><td class="k">黒い森</td><td>鹿（白・黒・赤・茶）／<b>魔法の鹿</b>（白・黒・赤）</td><td>各20／各5</td></tr>
-    <tr><td class="k">沼</td><td>アンデッド馬（炎・氷・毒・腐敗）</td><td>各15</td></tr>
-    <tr><td class="k">山</td><td>狼（白・黒・灰・ティンバー）／<b>スター狼</b></td><td>各20／5</td></tr>
+    <tr><td class="k">草原</td><td>馬（白・黒・灰・茶・パロミノ）</td><td>各<b>8</b></td></tr>
+    <tr><td class="k">黒い森</td><td>鹿（白・黒・赤・茶）／<b>魔法の鹿</b>（白・黒・赤）</td><td>各<b>8</b>／各<b>3</b></td></tr>
+    <tr><td class="k">沼</td><td>アンデッド馬（炎・氷・毒・腐敗）</td><td>各<b>6</b></td></tr>
+    <tr><td class="k">山</td><td>狼（白・黒・灰・ティンバー）／<b>スター狼</b></td><td>各<b>8</b>／<b>3</b></td></tr>
     <tr><td class="k">平原</td><td><b>ユニコーン</b>（白・黒）</td><td>各3</td></tr>
     <tr><td class="k">ミストランド</td><td><b>ペガサス</b>（白・黒）</td><td>各3</td></tr>
     <tr><td class="k">灰の地</td><td><b>ドラゴン</b>（赤・黒・緑・茶）</td><td>各1</td></tr>
@@ -1046,7 +1048,8 @@
       <div class="block">
         <span class="lbl">手に入れ方</span>
         <ul>
-          <li><b>野生で出るのは各種2バリエーションだけ</b>。草原＝パロミノ馬とコズミック馬／黒い森＝赤鹿とコズミック鹿／沼＝腐敗アンデッド馬／山＝ティンバーウルフ</li>
+          <li><b>野生では色ごとに全部出る</b>（2026-07-30に実測して訂正。以前ここに「各種2バリエーションだけ」と書いてあったのは誤り）。草原＝馬5色／黒い森＝鹿4色＋魔法の鹿3色／沼＝アンデッド馬4種／山＝狼4色＋スター狼。コズミック版は各系統に1種で0.2%</li>
+          <li><b>2026-07-30、湧きやすさを半分に下げた</b>（馬・狼・鹿は20→8、アンデッド馬は15→6）。判定は<b>10分ごと</b>なので、草原で馬を見かける確率は10分あたり67%→<b>34%</b>。そこら中にいる状態をやめ、見つけたら乗り物として価値がある形にした</li>
           <li>手懐け方：<b>釜Lv1で「コズミック・トリート」を作る</b> → 忍び寄って足元に落とす → 離れる → ハートが出れば馴れ始め。本来は計30分だが、<b>このサーバーは手懐け時間を半分にしてあるので約15分</b></li>
           <li>それ以外は<b>召喚アイテム</b>で呼ぶ。<b>召喚書</b>を使えばその生物を恒久的に解放できる</li>
         </ul>
@@ -1885,6 +1888,22 @@
   こちらは <kbd>F6</kbd> の画面の <b>Kit Packs</b> でだけ使える。宝くじや宝箱には使えない。
 </div>
 
+<h3 style="margin-top:30px">レアリティの見分け方</h3>
+<p class="section-note" style="margin-bottom:10px">装備の<b>名前の色</b>でレアリティが分かる。白は普通の装備（魔法効果なし）。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>色</th><th>レアリティ</th><th>効果の数</th><th>どこで手に入るか</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>白</b></td><td>普通</td><td class="num">—</td><td>作る・拾う</td></tr>
+    <tr><td class="k"><b>青</b></td><td>マジック</td><td class="num">1〜4個</td><td>どこでも</td></tr>
+    <tr><td class="k"><b>黄</b></td><td>レア</td><td class="num">1〜5個</td><td>黒い森あたりから</td></tr>
+    <tr><td class="k"><b>紫</b></td><td>エピック</td><td class="num">1〜6個</td><td>山・平原から</td></tr>
+    <tr><td class="k"><b>青緑</b></td><td>レジェンダリー</td><td class="num">1〜7個</td><td>ボス・★付きの強敵・黄金の宝箱</td></tr>
+    <tr><td class="k"><b>橙</b></td><td>ミシック</td><td class="num">1〜7個</td><td>ほぼボス限定</td></tr>
+  </tbody>
+</table>
+</div>
+
 <h3 style="margin-top:30px">装備に付く効果の個数</h3>
 <p class="section-note" style="margin-bottom:10px">レアリティごとに<b>個数の出方そのものが違う</b>（2026-07-30変更）。下限は無いので、<b>マジックでも稀に4個</b>付くし、<b>ミシックでも稀に1個</b>で終わる。あわせてレアリティは<b>1つあたりの効果の大きさ</b>も決める。</p>
 <div class="tbl-wrap">
@@ -1901,28 +1920,138 @@
 </div>
 <div class="callout good">マジックは平均1.6個、ミシックは平均4.2個。<b>高レアほど「多くて強い効果」が付きやすい</b>が、低レアの大当たりも残してある。</div>
 
-<h3 style="margin-top:30px">レジェンダリー装備はどれくらい落ちるか</h3>
+<h3 style="margin-top:30px">レアリティはどれくらい落ちるか</h3>
 <p class="section-note" style="margin-bottom:10px">
-  「本当に出るのか」とよく聞かれるので、実際の抽選表から計算した数字を載せておく。
-  <b>敵1体を倒したときにレジェンダリーが出る確率</b>。★は強化された敵。
+  抽選は<b>2段階</b>。まず「魔法装備が落ちるかどうか」、落ちたら「どのレアリティか」。
+  下の表は実際の抽選表から出した数字（★は強化された敵）。
 </p>
 <div class="tbl-wrap">
 <table>
-  <thead><tr><th>敵</th><th>星なし</th><th>★</th><th>★★</th></tr></thead>
+  <thead><tr><th>相手</th><th>★</th><th>何か落ちる</th><th>マジック</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
   <tbody>
-    <tr><td class="k"><b>グレイドワーフ</b></td><td>1/20,000</td><td>1/10,000</td><td>1/667</td></tr>
-    <tr><td class="k"><b>ドラウグル・トロル</b></td><td>1/667</td><td>1/200</td><td><b>1/93</b></td></tr>
-    <tr><td class="k"><b>狼・フェンリング</b></td><td>1/250</td><td>1/56</td><td><b>1/19</b></td></tr>
-    <tr><td class="k"><b>ロックス・ゴブリン・海蛇・石ゴーレム</b></td><td>1/96</td><td>1/48</td><td><b>1/17</b></td></tr>
+    <tr><td class="k"><b>草原の雑魚</b></td><td>なし</td><td class="num">0.5%</td><td class="num">99.9%</td><td class="num">—</td><td class="num">—</td><td class="num">0.1%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k">同上</td><td>★★</td><td class="num">10%</td><td class="num">89.9%</td><td class="num">10%</td><td class="num">—</td><td class="num">0.1%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>黒い森・沼</b></td><td>なし</td><td class="num">10%</td><td class="num">50%</td><td class="num">47%</td><td class="num">2%</td><td class="num">1%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k">同上</td><td>★★</td><td class="num">30%</td><td class="num">29%</td><td class="num">59%</td><td class="num">9%</td><td class="num"><b>3%</b></td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>山・平原</b></td><td>なし</td><td class="num">20%</td><td class="num">—</td><td class="num">74%</td><td class="num">24%</td><td class="num">2%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k">同上</td><td>★★</td><td class="num">50%</td><td class="num">—</td><td class="num">35%</td><td class="num">55%</td><td class="num"><b>10%</b></td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>ミストランド</b></td><td>★★</td><td class="num">70%</td><td class="num">—</td><td class="num">—</td><td class="num">80%</td><td class="num"><b>20%</b></td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>灰の地・極北</b></td><td>なし</td><td class="num">40%</td><td class="num">—</td><td class="num">5%</td><td class="num">26%</td><td class="num"><b>68%</b></td><td class="num"><b>1.3%</b></td></tr>
+    <tr><td class="k">同上</td><td>★★</td><td class="num">70%</td><td class="num">—</td><td class="num">—</td><td class="num">28%</td><td class="num"><b>68%</b></td><td class="num"><b>4.2%</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="section-note" style="margin:16px 0 10px">
+  <b>ボスは必ず落とす。</b>しかも本数が多く、レアリティも高い。
+</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>ボス</th><th>本数</th><th>マジック</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>エイクスュル</b></td><td class="num">1.3本</td><td class="num">88%</td><td class="num">10%</td><td class="num">1%</td><td class="num">0.5%</td><td class="num">0.01%</td></tr>
+    <tr><td class="k"><b>長老</b></td><td class="num">1.8本</td><td class="num">59%</td><td class="num">29%</td><td class="num">10%</td><td class="num">2%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>ボーンマス</b></td><td class="num">2.5本</td><td class="num">20%</td><td class="num">60%</td><td class="num">15%</td><td class="num">5%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>モデル</b></td><td class="num">3.3本</td><td class="num">—</td><td class="num">40%</td><td class="num">50%</td><td class="num">10%</td><td class="num">0.02%</td></tr>
+    <tr><td class="k"><b>ヤグルス</b></td><td class="num">4.1本</td><td class="num">—</td><td class="num">—</td><td class="num">80%</td><td class="num"><b>19%</b></td><td class="num">1%</td></tr>
+    <tr><td class="k"><b>女王</b></td><td class="num">4.1本</td><td class="num">—</td><td class="num">—</td><td class="num">20%</td><td class="num"><b>70%</b></td><td class="num"><b>10%</b></td></tr>
+    <tr><td class="k"><b>フェーダー</b></td><td class="num">4.1本</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num"><b>80%</b></td><td class="num"><b>20%</b></td></tr>
   </tbody>
 </table>
 </div>
 <div class="callout good">
-  <b>★付きの強敵なら20体前後に1本出る。</b>
-  序盤の雑魚が絶望的に低いだけで、進めば普通に出る。<br>
-  なお<b>ミシック</b>（さらに上の等級）も0.02%で出るが、固有名の装備は定義が0件なので、
-  <b>効果が5〜7個付いた強い装備</b>として出る。
+  <b>レジェンダリーが欲しいならボスを倒すのが一番早い。</b>
+  雑魚から出るのは20万体に1体だが、女王なら7割、フェーダーなら8割で落ちる。<br>
+  <b>ミシックは実質ボス限定</b>（フェーダー20%・女王10%）。
 </div>
+
+<h3 style="margin-top:30px">固有の名前が付いた装備</h3>
+<p class="section-note" style="margin-bottom:10px">
+  レジェンダリーとミシックには<b>名前の付いた固有装備</b>がある。固有装備は<b>必ず付く効果</b>を持っていて、
+  そのうえにランダムの効果が乗る。<b>装備の種類が合わないと固有にはならない</b>（例：剣の固有装備は片手剣にしか付かない）。
+</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>種類</th><th>数</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>レジェンダリー固有</b></td><td class="num">39種</td><td>Dyrnwyn（炎ダメージ追加＋炎をまとう）</td></tr>
+    <tr><td class="k">レジェンダリーのセット</td><td class="num">2種</td><td>Heimdall（4部位で Undying）</td></tr>
+    <tr><td class="k"><b>ミシック固有</b></td><td class="num">30種</td><td>不滅の刃（Undying＋吸血＋スタミナ軽減）</td></tr>
+    <tr><td class="k">ミシックのセット</td><td class="num">2種</td><td>不滅の護り（4部位で Undying）</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout good">
+  レジェンダリー／ミシックになったうちの<b>15%がセット装備</b>。4部位そろえるとセットボーナスが付く。
+</div>
+
+<!-- ══════════ エンチャント ══════════ -->
+<h2 id="enchant"><span class="n">System</span>エンチャントのやり方</h2>
+
+<p class="section-note" style="margin-bottom:10px">
+  <b>普通の装備を魔法装備に変えられる。</b>拾ったレジェンダリーを待たなくても、
+  自分の使いたい武器を好きなレアリティに引き上げられるのがこのサーバーの本筋。
+</p>
+
+<h3 style="margin-top:24px">1. エンチャント台を建てる</h3>
+<p class="section-note" style="margin-bottom:10px">
+  <b>ハンマーの建築メニュー</b>から建てる。建てただけでは<b>「犠牲」しか使えない</b>。
+  ほかの機能は<b>台をアップグレードして1つずつ解放</b>する。
+</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>機能</th><th>解放に必要なもの</th><th>何ができるか</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>犠牲</b></td><td>最初から使える</td><td>トロフィー・いらない装備 → 素材に変換</td></tr>
+    <tr><td class="k"><b>エンチャント</b></td><td>マジックの粉塵×5 ／ <b>燃焼核×3</b> ／ 銅×2</td><td><b>普通の装備を魔法装備にする</b></td></tr>
+    <tr><td class="k"><b>分解</b></td><td><b>燃焼核×5</b> ／ 鉄の賞金トークン×3</td><td>魔法装備 → 粉塵・精髄・試薬に戻す</td></tr>
+    <tr><td class="k"><b>素材変換</b></td><td>木×20 ／ 骨の欠片×4 ／ 樹液×10</td><td>素材を別のレアリティへ変換</td></tr>
+    <tr><td class="k"><b>強化</b></td><td>マジックの破片×3 ／ <b>燃焼核×3</b> ／ コイン×200</td><td>付いている効果を1つ振り直す</td></tr>
+    <tr><td class="k"><b>ルーン</b></td><td><b>燃焼核×5</b> ／ 青銅×2</td><td>魔法装備をルーン石に戻す・刻印する</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout"><b>全部に燃焼核が要る（合計16個）。</b>黒い森の墓地を1〜2つ回ってから取りかかると早い。</div>
+
+<h3 style="margin-top:24px">2. エンチャントに必要な素材</h3>
+<p class="section-note" style="margin-bottom:10px"><b>ルーン石だけでは使えない。3種セットが要る。</b></p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>作りたいレアリティ</th><th>武器・弓・松明・道具</th><th>防具・盾・装飾品</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>マジック</b></td><td>マジックのルーン石×1 ／ 粉塵×5 ／ 精髄×5</td><td>マジックのルーン石×1 ／ 粉塵×5 ／ 試薬×5</td></tr>
+    <tr><td class="k"><b>レア</b></td><td>レアのルーン石×1 ／ 粉塵×5 ／ 精髄×5</td><td>レアのルーン石×1 ／ 粉塵×5 ／ 試薬×5</td></tr>
+    <tr><td class="k"><b>エピック</b></td><td colspan="2">エピックのルーン石×1 ／ 粉塵×5 ／ 精髄または試薬×5</td></tr>
+    <tr><td class="k"><b>レジェンダリー</b></td><td colspan="2">レジェンダリーのルーン石×1 ／ 粉塵×5 ／ 精髄または試薬×5</td></tr>
+    <tr><td class="k"><b>ミシック</b></td><td colspan="2">ミシックのルーン石×1 ／ 粉塵×5 ／ 精髄または試薬×5</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout good">
+  <b>粉塵・精髄・試薬は「分解」で手に入る。</b>使わない魔法装備をどんどん分解して貯めるのが基本。<br>
+  <b>宝箱（5〜8トークン）にも各5%で入っている。</b>ルーン石と一緒に狙える。
+</div>
+
+<h3 style="margin-top:24px">3. ルーン石の入手先</h3>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>ルーン石</th><th>手に入る場所</th></tr></thead>
+  <tbody>
+    <tr><td class="k"><b>マジック</b></td><td>農夫・建築家・狩人の隠し箱（8%）／ 犠牲でトロフィーから</td></tr>
+    <tr><td class="k"><b>レア</b></td><td>採掘者・船乗り・戦士の隠し箱（8%）</td></tr>
+    <tr><td class="k"><b>エピック</b></td><td>アッシュランド・運試し・極北の箱（6%）</td></tr>
+    <tr><td class="k"><b>レジェンダリー</b></td><td><b>黄金の宝箱（30トークン）で3%。ここだけ</b></td></tr>
+    <tr><td class="k"><b>ミシック</b></td><td><b>黄金の宝箱で0.3%。ここだけ</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 style="margin-top:24px">4. 効果が気に入らないとき</h3>
+<p class="section-note">
+  <b>強化（Augment）</b>で効果を1つ選んで振り直せる。<b>やり直すたびにコインの費用が上がる</b>
+  （500 → 1000 → 1500 → 2000 …）。<br>
+  <b>ルーン抽出</b>を使えば、魔法装備を同じレアリティのルーン石に戻せる。失敗した装備の救済に使う。
+</p>
 
 <!-- ══════════ スキル ══════════ -->
 <h2 id="skills"><span class="n">System</span>スキルを早く上げる</h2>
